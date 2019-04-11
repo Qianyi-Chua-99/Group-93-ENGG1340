@@ -18,7 +18,7 @@ Commodity::Commodity(string n, string c, double p, int q) {
 string Commodity::getName() {
 	return name;
 }
-double Commodity::getCategory() {
+string Commodity::getCategory() {
 	return category;
 }
 double Commodity::getPrice() {
@@ -30,13 +30,13 @@ int Commodity::getTotalQuantity() {
 bool Commodity::stockAvailable() {
 	return (! outOfStock);
 }
-void setName(string n) {
+void Commodity::setName(string n) {
 	name = n;
 }
-void setCategory(string c) {
+void Commodity::setCategory(string c) {
 	category = c;
 }
-void setPrice (string p) {
+void Commodity::setPrice (double p) {
 	price = p;
 }
 

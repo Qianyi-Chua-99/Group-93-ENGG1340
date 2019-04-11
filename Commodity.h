@@ -7,7 +7,7 @@ class Commodity{
 	public:
 		Commodity (string n, string c, double p, int q);
 		string getName();
-		string getCategory():
+		string getCategory();
 		double getPrice();
 		int getTotalQuantity();
 		//int getQuantity(string shop);
