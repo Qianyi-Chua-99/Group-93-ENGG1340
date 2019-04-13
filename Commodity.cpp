@@ -29,6 +29,13 @@ int Commodity::getTotalQuantity() {
 	return totalQuantity;
 }
 
+int Commodity::getQuantity(string shop) {
+	if (quantity.find(shop) != quantity.end())
+		return quantity[shop];
+	else
+		return 0;
+}
+
 bool Commodity::stockAvailable() {
 	return (! outOfStock);
 }

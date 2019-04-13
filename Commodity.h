@@ -11,7 +11,7 @@ class Commodity{
 		string getCategory();
 		double getPrice();
 		int getTotalQuantity();
-		//int getQuantity(string shop);
+		int getQuantity(string shop);
 		bool stockAvailable();
 		void setName(string n);
 		void setCategory(string c);

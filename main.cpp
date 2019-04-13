@@ -14,5 +14,7 @@ int main() {
 	
 	newCommodity.setShopQuantity("Giant", 30);
 	newCommodity.printDetails();
+	
+	cout << newCommodity.getQuantity("Giant") << endl;
 	return 0;
 }
