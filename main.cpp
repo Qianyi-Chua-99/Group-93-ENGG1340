@@ -5,11 +5,14 @@
 using namespace std;
 
 int main() {
-	Commodity newCommodity("testing", "testingCategory", 10, 20);
-	cout << newCommodity.getName() << " " << newCommodity.getCategory() << " " << newCommodity.getPrice() << " " << newCommodity.stockAvailable() << endl;
-	newCommodity.setName("ok");
-	newCommodity.setPrice(90);
-	newCommodity.setCategory("OK");
-	cout << newCommodity.getName() << " " << newCommodity.getCategory() << " " << newCommodity.getPrice() << " " << newCommodity.stockAvailable() << endl;
+	Commodity newCommodity("testing", "testingCategory", 10);
+	newCommodity.printDetails();
+	
+	newCommodity.setShopQuantity("Tesco", 10);
+	newCommodity.setShopQuantity("Giant", 20);
+	newCommodity.printDetails();
+	
+	newCommodity.setShopQuantity("Giant", 30);
+	newCommodity.printDetails();
 	return 0;
 }

@@ -6,7 +6,7 @@ using namespace std;
 
 class Commodity{
 	public:
-		Commodity (string n, string c, double p, int q);
+		Commodity (string n, string c, double p);
 		string getName();
 		string getCategory();
 		double getPrice();
@@ -16,12 +16,15 @@ class Commodity{
 		void setName(string n);
 		void setCategory(string c);
 		void setPrice(double p);
+		void setShopQuantity(string shop, int quantity);
+		void printDetails();
 		//void setQuantity(string shop);
 		//static void readData(string filename);
 		//static void writeData(string filename);
 		
 
 	private:
+		map<string, int> quantity;
 		string name;
 		string category;
 		double price;
