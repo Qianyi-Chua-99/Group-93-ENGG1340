@@ -1,10 +1,13 @@
 #include <iostream>
 #include <string>
 #include "Commodity.h"
+#include "Shop.h"
 
 using namespace std;
 
 int main() {
+	Shop::sayHello();
+/*
 	Commodity newCommodity("testing", "testingCategory", 10);
 	newCommodity.printDetails();
 	
@@ -16,5 +19,6 @@ int main() {
 	newCommodity.printDetails();
 	
 	cout << newCommodity.getQuantity("Giant") << endl;
+*/
 	return 0;
 }
