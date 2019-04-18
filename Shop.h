@@ -1,3 +1,6 @@
+#ifndef SHOP_H
+#define SHOP_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,8 +10,10 @@ using namespace std;
 
 class Shop{
 	public:
+		static vector<Commodity> listOfCommodity;
 		static void readData(string filename);
 	private:
-		static vector<Commodity> listOfCommodity;
 		
 };
+
+#endif

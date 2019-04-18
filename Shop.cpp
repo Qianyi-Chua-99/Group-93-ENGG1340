@@ -4,11 +4,14 @@
 #include <sstream> 
 #include <fstream>
 #include "Shop.h"
+#include "Commodity.h"
 
+vector<Commodity> Shop::listOfCommodity;
 void Shop::readData(string filename) {
-
 	string CommodityInformation;
-	string item;
+	string commodityName;
+	string category;
+	string tmp;
 	ifstream fin;
 	fin.open("Information.txt");
 
@@ -18,13 +21,28 @@ void Shop::readData(string filename) {
 	}
 	
 	while (getline(fin, CommodityInformation)) {
-		cout << CommodityInformation << endl;
+		//cout << CommodityInformation << endl;
 		istringstream iss(CommodityInformation);
-
-		while (getline(iss, item, ',')) {
-			cout << item << endl;
+		getline(iss, commodityName, ',');
+		getline(iss, category, ',');
+		getline(iss, tmp, ',');
+		double price = stoi(tmp);
+		Commodity newCommodity (commodityName, category, price);
+		string shopName;
+		int quantity;
+		bool paired = false;
+		while (getline(iss, tmp, ',')) {
+			if (!paired) {
+				shopName = tmp;
+				paired = true;
+			}
+			else {
+				quantity = stoi(tmp);
+				newCommodity.setShopQuantity(shopName, quantity);
+				paired = false;
+			}
 		}
+		Shop::listOfCommodity.push_back(newCommodity);
 	}
-	
 	
 }

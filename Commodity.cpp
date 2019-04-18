@@ -60,15 +60,15 @@ void Commodity::setShopQuantity(string shop, int q) {
 }
 
 void Commodity::printDetails() {
-	cout << "Name:\t" << name << endl;
-	cout << "Category:\t" << category << endl;
-	cout << "Price:\t" << price << endl;
-	cout << "Quantities:" << endl;
+	cout << "Name: " << name << endl;
+	cout << "Category: " << category << endl;
+	cout << "Price: " << price << endl;
+	cout << "Quantities: " << endl;
 	map <string, int>::iterator itr;
 	for (itr = quantity.begin(); itr != quantity.end(); itr++) {
-		cout << itr->first << '\t' << itr->second << endl;
+		cout << itr->first << ' ' << itr->second << endl;
 	}
-	cout << "Total quantities:\t" << totalQuantity << endl;
+	cout << "Total quantities: " << totalQuantity << endl;
 	cout << endl;
 }
 

@@ -1,3 +1,6 @@
+#ifndef COMMODITY_H
+#define COMMODITY_H
+
 #include <iostream>
 #include <string>
 #include <map>
@@ -32,3 +35,5 @@ class Commodity{
 		bool outOfStock;
 		
 };
+
+#endif
