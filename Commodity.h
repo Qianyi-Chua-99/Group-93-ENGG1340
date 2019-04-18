@@ -21,11 +21,7 @@ class Commodity{
 		void setPrice(double p);
 		void setShopQuantity(string shop, int quantity);
 		void printDetails();
-		//void setQuantity(string shop);
-		//static void readData(string filename);
-		//static void writeData(string filename);
 		
-
 	private:
 		map<string, int> quantity;
 		string name;

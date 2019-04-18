@@ -7,13 +7,14 @@
 #include "Commodity.h"
 
 vector<Commodity> Shop::listOfCommodity;
+
 void Shop::readData(string filename) {
 	string CommodityInformation;
 	string commodityName;
 	string category;
 	string tmp;
 	ifstream fin;
-	fin.open("Information.txt");
+	fin.open(filename);
 
 	if (fin.fail()) {
 		cout << "Error in file opening!" << endl;
@@ -21,7 +22,6 @@ void Shop::readData(string filename) {
 	}
 	
 	while (getline(fin, CommodityInformation)) {
-		//cout << CommodityInformation << endl;
 		istringstream iss(CommodityInformation);
 		getline(iss, commodityName, ',');
 		getline(iss, category, ',');
