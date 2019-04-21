@@ -10,12 +10,13 @@ int main() {
 
 	//initialize everything
 	Shop::readData("Information.txt");
+
+	//declare function for Enter a Shop
+	void 
 	
 	//Welcome message
 	cout << "******************************" << endl;
-	//cout << endl;
 	cout << " Welcome to Inventory System! " << endl;
-	//cout << endl;
 	cout << "******************************" << endl;
 	cout << endl;
 
@@ -28,14 +29,14 @@ int main() {
 		{
 		case '1':
 			//Enter shop options function
-			cout << "Successfully entered a shop" << endl;
+			ChooseShop();
 			break;
 		case '2':
 			//Create shop options fucntion
-			cout << "Successfully entered a shop" << endl;
+			CreateShop()
 			break;
 		}
-		return 0;
+		
 	}
 	
 
