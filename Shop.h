@@ -26,11 +26,12 @@ class Shop{
 		static void addCommodity(Commodity& element);
 		
 		Shop(string n);
-		string getShopName ();
-		void setCommodityQuantity (string n, int quantity);
-		void setCommodityPrice (string n, double price);
-		void setCommodityCategory (string n, string category);
-		void alertOutOfStock ();
+		string getShopName();
+		void setCommodityQuantity(string n, int quantity);
+		void setCommodityPrice(string n, double price);
+		void setCommodityCategory(string n, string category);
+		void deleteCommodity(string n);
+		void alertOutOfStock();
 		void filter(int mode, string category);
 		void filter(int mode, double lowerBound, double upperBound);
 		void sortCommodity(int mode, int order);

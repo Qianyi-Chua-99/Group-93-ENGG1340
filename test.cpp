@@ -60,7 +60,8 @@ int main() {
 	vector<Shop>::iterator ptr;
 	for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr ++) {
 		cout << (*ptr).getShopName() << endl;
-		(*ptr).printCommodity(1);
+		(*ptr).alertOutOfStock();
 		cout << "###########################################################" << endl;
 	}
+	
 }

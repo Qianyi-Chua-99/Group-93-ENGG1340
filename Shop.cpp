@@ -99,6 +99,17 @@ void Shop::addCommodity(Commodity& element) {
 	Shop::listOfCommodity.push_back(element);
 }
 
+void Shop::deleteCommodity(string n) {
+	vector<Commodity>::iterator ptr;
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		if((*ptr).getName() == n) {
+			Shop::listOfCommodity.erase(ptr);
+			break;
+		}
+	};
+}
+
+
 string Shop::getShopName() {
 	return shopName;
 }
