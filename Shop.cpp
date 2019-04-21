@@ -573,6 +573,11 @@ void Shop::readAllHistory() {
 		Shop::allHistory[tmp1] = tmp2;
 	}
 	fin.close();
+	
+	vector<Shop>::iterator shopptr;
+	for (shopptr = Shop::listOfShop.begin(); shopptr != Shop::listOfShop.end(); shopptr ++) {
+		(*shopptr).readHistory();
+	}
 }
 
 void Shop::printAllHistory(string date) {
@@ -593,7 +598,7 @@ void Shop::printAllHistory(string date) {
 		else {
 			cout << "No history record found" << endl;
 		}
-	} 	
+	}	
 }
 
 void Shop::writeAllHistory() {
@@ -638,6 +643,11 @@ void Shop::writeAllHistory() {
 	}
 	
 	fout.close();
+	
+	vector<Shop>::iterator shopptr;
+	for (shopptr = Shop::listOfShop.begin(); shopptr != Shop::listOfShop.end(); shopptr ++) {
+		(*shopptr).writeHistory();
+	}
 }
 
 void Shop::deleteAllHistory(string date) {
@@ -646,10 +656,18 @@ void Shop::deleteAllHistory(string date) {
 	if (ptr != Shop::allHistory.end()) {
 		Shop::allHistory.erase(ptr);
 	}
+	vector<Shop>::iterator shopptr;
+	for (shopptr = Shop::listOfShop.begin(); shopptr != Shop::listOfShop.end(); shopptr ++) {
+		(*shopptr).deleteHistory(date);
+	}
 }
 
 void Shop::clearAllHistory() {
 	Shop::allHistory.clear();
+	vector<Shop>::iterator shopptr;
+	for (shopptr = Shop::listOfShop.begin(); shopptr != Shop::listOfShop.end(); shopptr ++) {
+		(*shopptr).clearHistory();
+	}
 }
 
 void Shop::debug() {

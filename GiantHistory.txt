@@ -3,37 +3,37 @@
 Name: Apple
 Category: Fruit
 Price: 9.000000
-Quantity: 104
+Quantity: 0
 
 Name: Broccoli
 Category: Vegetable
 Price: 7.000000
-Quantity: 14
+Quantity: 0
 
 Name: Car
 Category: Vehicle
 Price: 7000.000000
-Quantity: 14
+Quantity: 0
 
 Name: Chandelier
 Category: Furniture
 Price: 3000.000000
-Quantity: 14
+Quantity: 0
 
 Name: Dell XPS
 Category: Electronic
 Price: 10000.000000
-Quantity: 14
+Quantity: 0
 
 Name: Hersheys Choco
 Category: Sweet
 Price: 10.000000
-Quantity: 14
+Quantity: 0
 
 Name: Macbook Pro
 Category: Electronic
 Price: 12000.000000
-Quantity: 14
+Quantity: 0
 
 Name: Orange
 Category: Fruit
@@ -43,6 +43,6 @@ Quantity: 0
 Name: Surface
 Category: Electronic
 Price: 3495.000000
-Quantity: 14
+Quantity: 0
 
 ;

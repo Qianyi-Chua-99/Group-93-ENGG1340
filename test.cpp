@@ -34,8 +34,8 @@ int main() {
    	Shop::listOfShop[0].writeHistory();
    	*/
    	Shop::readAllHistory();
-   	Shop::deleteAllHistory("2019/4/22");
-   	Shop::printAllHistory();
+   	//Shop::deleteAllHistory("2019/4/22");
+   	//Shop::printAllHistory();
    	Shop::writeAllHistory();   	
    	/*
    	ofstream fout;
