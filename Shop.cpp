@@ -17,7 +17,8 @@ int Shop::PRICE = 3;
 int Shop::ASCENDING = 0;
 int Shop::DESCENDING = 1;
 
-vector<Commodity> Shop::listOfCommodity;
+vector<Commodity> Shop::listOfCommodity {};
+vector<Shop> Shop::listOfShop {};
 
 string SHOPNAME;
 
@@ -26,10 +27,11 @@ Shop::Shop(string n) {
 	SHOPNAME = n;
 	vector<Commodity>::iterator ptr;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
-		if((*ptr).isShopPresent(shopName)) {
-			shopCommodityList.push_back(&(*ptr));
+		if(!(*ptr).isShopPresent(shopName)) {
+			(*ptr).setShopQuantity(shopName, 0);
 		}
 	}
+	Shop::listOfShop.push_back(*this);
 }
 
 void Shop::readData(string filename) {
@@ -69,36 +71,112 @@ void Shop::readData(string filename) {
 	}
 }
 
-void Shop::addCommodity(const Commodity& element) {
+void Shop::readShopData(string filename) {
+	string ShopInformation;
+	string tmp;
+	ifstream fin;
+	fin.open(filename);
+
+	if (fin.fail()) {
+		cout << "Error in file opening!" << endl;
+		return;
+	}
+	while (getline(fin, ShopInformation)) {
+		istringstream iss(ShopInformation);
+		while (getline(iss, tmp, ',')) {
+			Shop newShop(tmp);
+		}
+	}
+}
+
+void Shop::addCommodity(Commodity& element) {
+	vector<Shop>::iterator ptr;
+	for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr ++) {
+		if(!element.isShopPresent((*ptr).getShopName())) {
+			element.setShopQuantity((*ptr).getShopName(), 0);
+		}
+	};
 	Shop::listOfCommodity.push_back(element);
 }
 
+string Shop::getShopName() {
+	return shopName;
+}
+
+void Shop::setCommodityQuantity (string n, int quantity) {
+	vector<Commodity>::iterator ptr;
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		if(((*ptr).getName()) == n) {
+			(*ptr).setShopQuantity(shopName, quantity);
+			break;
+		}
+	}
+}
+
+void Shop::setCommodityPrice (string n, double price) {
+	vector<Commodity>::iterator ptr;
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		if(((*ptr).getName()) == n) {
+			(*ptr).setPrice(price);
+			break;
+		}
+	}
+}
+
+void Shop::setCommodityCategory (string n, string category) {
+	vector<Commodity>::iterator ptr;
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		if(((*ptr).getName()) == n) {
+			(*ptr).setCategory(category);
+			break;
+		}
+	}
+}
+
+void Shop::alertOutOfStock () {
+	vector<Commodity>::iterator ptr;
+	string message = "";
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		if(((*ptr).getQuantity(shopName)) == 0) {
+			message += (*ptr).getName();
+			message += '\n';
+		}
+	}
+	if (message == "") {
+		cout << "There is no commodities that are currently out of stock" << endl;
+	}
+	else {
+		cout << "List of commodities that are currently out of stock" << endl;
+		cout << message << endl;
+	}
+}
+
 void Shop::filter(int mode, string category) {
-	vector<Commodity*>::iterator ptr;
+	vector<Commodity>::iterator ptr;
 	filterList.clear();
 	switch (mode) {
 		case 1:
-			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
-				if ((*(*ptr)).getCategory() == category){
-					filterList.push_back((*ptr));
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				if ((*ptr).getCategory() == category){
+					filterList.push_back(&(*ptr));
 				}
 			}
-			printCommodity(1);
+			printCommodity(0);
 			break;
 	}
 }
 
 void Shop::filter(int mode, double lowerBound, double upperBound) {
-	vector<Commodity*>::iterator ptr;
+	vector<Commodity>::iterator ptr;
 	filterList.clear();
 	switch (mode) {
 		case 2:
 		{
 			int lb = (int)lowerBound;
 			int ub = (int)upperBound;
-			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
-				if (((*(*ptr)).getQuantity(shopName) >= lb) && ((*(*ptr)).getQuantity(shopName) <= ub)){
-					filterList.push_back((*ptr));
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				if (((*ptr).getQuantity(shopName) >= lb) && ((*ptr).getQuantity(shopName) <= ub)){
+					filterList.push_back(&(*ptr));
 				}
 			}
 			printCommodity(0);
@@ -106,9 +184,9 @@ void Shop::filter(int mode, double lowerBound, double upperBound) {
 		}
 		case 3:
 		{
-			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
-				if (((*(*ptr)).getPrice() >= lowerBound) && ((*(*ptr)).getPrice() <= upperBound)){
-					filterList.push_back((*ptr));
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				if (((*ptr).getPrice() >= lowerBound) && ((*ptr).getPrice() <= upperBound)){
+					filterList.push_back(&(*ptr));
 				}
 			}
 			printCommodity(0);
@@ -116,36 +194,36 @@ void Shop::filter(int mode, double lowerBound, double upperBound) {
 	}
 }
 
-bool nameAscending(Commodity* A, Commodity* B) {
-	return (((*A).getName()) < ((*B).getName()));
+bool nameAscending(Commodity A, Commodity B) {
+	return (((A).getName()) < ((B).getName()));
 }
 
-bool nameDescending(Commodity* A, Commodity* B) {
-	return (((*A).getName()) > ((*B).getName()));
+bool nameDescending(Commodity A, Commodity B) {
+	return (((A).getName()) > ((B).getName()));
 }
 
-bool categoryAscending(Commodity* A, Commodity* B) {
-	return (((*A).getCategory()) < ((*B).getCategory()));
+bool categoryAscending(Commodity A, Commodity B) {
+	return (((A).getCategory()) < ((B).getCategory()));
 }
 
-bool categoryDescending(Commodity* A, Commodity* B) {
-	return (((*A).getCategory()) > ((*B).getCategory()));
+bool categoryDescending(Commodity A, Commodity B) {
+	return ((A.getCategory()) > (B.getCategory()));
 }
 
-bool quantityAscending(Commodity* A, Commodity* B) {
-	return (((*A).getQuantity(SHOPNAME)) < ((*B).getQuantity(SHOPNAME)));
+bool quantityAscending(Commodity A, Commodity B) {
+	return (((A).getQuantity(SHOPNAME)) < ((B).getQuantity(SHOPNAME)));
 }
 
-bool quantityDescending(Commodity* A, Commodity* B) {
-	return (((*A).getQuantity(SHOPNAME)) > ((*B).getQuantity(SHOPNAME)));
+bool quantityDescending(Commodity A, Commodity B) {
+	return (((A).getQuantity(SHOPNAME)) > ((B).getQuantity(SHOPNAME)));
 }
 
-bool priceAscending(Commodity* A, Commodity* B) {
-	return (((*A).getPrice()) < ((*B).getPrice()));
+bool priceAscending(Commodity A, Commodity B) {
+	return (((A).getPrice()) < ((B).getPrice()));
 }
 
-bool priceDescending(Commodity* A, Commodity* B) {
-	return (((*A).getPrice()) > ((*B).getPrice()));
+bool priceDescending(Commodity A, Commodity B) {
+	return (((A).getPrice()) > ((B).getPrice()));
 }
 
 void Shop::sortCommodity(int mode, int order) {
@@ -153,33 +231,33 @@ void Shop::sortCommodity(int mode, int order) {
 		case 0:
 		{
 			if (order == Shop::ASCENDING)
-				sort(shopCommodityList.begin(), shopCommodityList.end(), nameAscending);
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), nameAscending);
 			else
-				sort(shopCommodityList.begin(), shopCommodityList.end(), nameDescending);
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), nameDescending);
 			break;
 		}
 		case 1:
 		{
 			if (order == Shop::ASCENDING)
-				sort(shopCommodityList.begin(), shopCommodityList.end(), categoryAscending);
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), categoryAscending);
 			else
-				sort(shopCommodityList.begin(), shopCommodityList.end(), categoryDescending);
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), categoryDescending);
 			break;
 		}
 		case 2:
 		{
 			if (order == Shop::ASCENDING)
-				sort(shopCommodityList.begin(), shopCommodityList.end(), quantityAscending);
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), quantityAscending);
 			else
-				sort(shopCommodityList.begin(), shopCommodityList.end(), quantityDescending);
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), quantityDescending);
 			break;
 		}
 		case 3:
 		{
 			if (order == Shop::ASCENDING)
-				sort(shopCommodityList.begin(), shopCommodityList.end(), priceAscending);
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), priceAscending);
 			else
-				sort(shopCommodityList.begin(), shopCommodityList.end(), priceDescending);
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), priceDescending);
 			break;
 		}
 	}
@@ -187,16 +265,25 @@ void Shop::sortCommodity(int mode, int order) {
 }
 
 void Shop::printCommodity(int mode) {
-	vector<Commodity*>::iterator ptr;
 	switch (mode) {
 		case 0:
-			for (ptr = Shop::filterList.begin(); ptr < Shop::filterList.end(); ptr ++) {
-				(*(*ptr)).printDetails(shopName);
+		{
+			vector<Commodity*>::iterator ptr1;
+			for (ptr1 = filterList.begin(); ptr1 < filterList.end(); ptr1 ++) {
+				(*(*ptr1)).printDetails(shopName);
 			}
 			break;
+		}
 		default:
-			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
-				(*(*ptr)).printDetails(shopName);
+		{
+			vector<Commodity>::iterator ptr;
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				(*ptr).printDetails(shopName);
 			}
+		}
 	}
+}
+
+void Shop::debug() {
+	cout << (Shop::listOfCommodity).size() << endl;
 }

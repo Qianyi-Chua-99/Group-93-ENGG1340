@@ -53,8 +53,11 @@ void Commodity::setPrice(double p) {
 }
 
 void Commodity::setShopQuantity(string shop, int q) {
-	if (quantity.find(shop) != quantity.end())
+	map<string, int>::iterator itr;
+	itr = quantity.find(shop);
+	if (quantity.find(shop) != quantity.end()) {
 		totalQuantity -= quantity[shop];
+	}
 	quantity[shop]=q;
 	totalQuantity += quantity[shop];
 }
