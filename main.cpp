@@ -12,13 +12,14 @@ int main() {
 	Shop::readData("Information.txt");
 	
 	//Welcome message
-	cout << setfill('*') << setw(30) << endl;
-	cout << endl;
+	cout << "******************************" << endl;
+	//cout << endl;
 	cout << " Welcome to Inventory System! " << endl;
+	//cout << endl;
+	cout << "******************************" << endl;
 	cout << endl;
-	cout << setfill('*') << setw(30) << endl;
-	
-	while(rue) {
+
+	while(true) {
 		cout << "Please choose an option: " << endl;
 		cout << "1. Enter a Shop" << '\t' << "2. Create a Shop" << endl;
 		int choice;
