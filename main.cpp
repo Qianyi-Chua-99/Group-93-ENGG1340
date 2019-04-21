@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip> 
 #include "Commodity.h"
 #include "Shop.h"
 
@@ -9,15 +10,18 @@ int main() {
 
 	//initialize everything
 	Shop::readData("Information.txt");
+
+	void EnterShop();
+	void CreateShop();
+	void Inventory_Options();
 	
 	//Welcome message
-	cout << setfill('*') << setw(30) << endl;
-	cout << endl;
+	cout << "******************************" << endl;
 	cout << " Welcome to Inventory System! " << endl;
+	cout << "******************************" << endl;
 	cout << endl;
-	cout << setfill('*') << setw(30) << endl;
-	
-	while(True) {
+
+	while(true) {
 		cout << "Please choose an option: " << endl;
 		cout << "1. Enter a Shop" << '\t' << "2. Create a Shop" << endl;
 		int choice;
@@ -26,43 +30,26 @@ int main() {
 		{
 		case '1':
 			//Enter shop options function
-			cout << "Successfully entered a shop" << endl;
+			EnterShop();
 			break;
 		case '2':
 			//Create shop options fucntion
-			cout << "Successfully entered a shop" << endl;
+			CreateShop()
 			break;
+		default:
+			cout << "Option Invalid! Please choose again: " << endl;
 		}
-		return 0;
+		
 	}
 	
 
-
-/*
-//Welcome message
-void displayWelcome() {
-	cout << setfill('*') << setw(30) << endl;
-	cout << endl;
-	cout << " Welcome to Inventory System! " << endl;
-	cout << endl;
-	cout << setfill('*') << setw(30) << endl;
-}
-
-//Choose store
-void displayShop() {
-	int i;
-	cout << endl;
-	cout << setfill('*') << setw(30) << endl;
-	cout << "Please select a store" << endl;
-	// for ( i = 0; i < VECTOR_SHOP??.size() ; i ++)
-		//cout << "		" << i << '.' << " " << Shop[i] << endl;
-	cout << "		" << (i+1) << '.' << " " << "Create New Shop" << endl;
-	cout << endl;
-	cout << setfill('*') << setw(30) << endl;
-	cout << endl;
-*/
-}
-
-
-
-
+	void EnterShop() {
+		/*print all shop names
+		if valid option, continue on with inventory choices*/
+		Inventory_Options();
+		//else
+		cout << "Option Invalid! Please choose again: " << endl;
+	}
+	
+	void CreateShop() {
+	}
