@@ -5,52 +5,40 @@
 
 using namespace std;
 
-void displayWelcome();
-void displayShop();
-bool validChoiceShop(int);
-void displayFunc();
-
 int main() {
 
 	//initialize everything
-	readData("Information.txt");
-
-	//welcome message
-	displayWelcome();
-
-	//while loop, select functions
-	string page = "chooseShop";
-	int choiceShop = 0;
-	int choice;
-	while (true){
-
-		//check ChoiceStop if valid
-		if ( validChoiceShop(choiceShop) == false ){
-			cout << "Invalid Choice! Please try again." << endl;
-			page = "chooseShop";
+	Shop::readData("Information.txt");
+	
+	//Welcome message
+	cout << setfill('*') << setw(30) << endl;
+	cout << endl;
+	cout << " Welcome to Inventory System! " << endl;
+	cout << endl;
+	cout << setfill('*') << setw(30) << endl;
+	
+	while(True) {
+		cout << "Please choose an option: " << endl;
+		cout << "1. Enter a Shop" << '\t' << "2. Create a Shop" << endl;
+		int choice;
+		cin >> choice;
+		switch (choice)
+		{
+		case '1':
+			//Enter shop options function
+			cout << "Successfully entered a shop" << endl;
+			break;
+		case '2':
+			//Create shop options fucntion
+			cout << "Successfully entered a shop" << endl;
+			break;
 		}
-		if ( validChoiceShop(choiceShop) == true ){
-			page = "funcList";
-		}
+		return 0;
+	}
+	
 
-		//layouts
-		switch ( page ) {
 
-			case chooseShop:
-				displayShop();
-				cin >> choiceShop;
-				break;
-
-			case funcList:
-				displayFunc();
-				cin >> choice;
-				break;
-
-		}
-
-	return 0;
-}
-
+/*
 //Welcome message
 void displayWelcome() {
 	cout << setfill('*') << setw(30) << endl;
@@ -72,18 +60,9 @@ void displayShop() {
 	cout << endl;
 	cout << setfill('*') << setw(30) << endl;
 	cout << endl;
+*/
 }
 
-bool validChoiceShop(int n){
-	//if ( n < VECTOR_SHOP.size() + 1 && n > 0 )
-	//	return true;
-	//else:
-	//  return true;
-}
 
-void displayFunc(){
-	cout << endl;
-	cout << setfill('*') << setw(30) << endl;
-	cout << "Please select a function" << endl;
-	cout << "		1. Find Item\n		2. Search Item\n		3. Another Function" << endl;
-}
+
+
