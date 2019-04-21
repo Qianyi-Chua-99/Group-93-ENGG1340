@@ -12,6 +12,7 @@ class Shop{
 	public:
 		static vector<Commodity> listOfCommodity;
 		static void readData(string filename);
+		static void addCommodity(const Commodity& element);
 	private:
 };
 

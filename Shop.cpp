@@ -27,6 +27,7 @@ void Shop::readData(string filename) {
 		getline(iss, tmp, ',');
 		double price = stoi(tmp);
 		Commodity newCommodity (commodityName, category, price);
+		string shopName;
 		int quantity;
 		bool paired = false;
 		while (getline(iss, tmp, ',')) {
@@ -42,4 +43,8 @@ void Shop::readData(string filename) {
 		}
 		Shop::listOfCommodity.push_back(newCommodity);
 	}
+}
+
+void Shop::addCommodity(const Commodity& element) {
+	Shop::listOfCommodity.push_back(element);
 }
