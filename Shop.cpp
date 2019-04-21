@@ -4,6 +4,7 @@
 #include <sstream>
 #include <fstream>
 #include <algorithm>
+#include <ctime>
 #include "Shop.h"
 #include "Commodity.h"
 
@@ -20,6 +21,7 @@ int Shop::DESCENDING = 1;
 vector<Commodity> Shop::listOfCommodity {};
 vector<Shop> Shop::listOfShop {};
 vector<Commodity*> Shop::filterAllList {};
+map<string, string> Shop::allHistory {};
 
 string SHOPNAME;
 
@@ -462,6 +464,192 @@ void Shop::printSpecificCommodity(string n) {
 			break;
 		}
 	}	
+}
+
+void Shop::readHistory() {
+	string fileName = shopName + "History.txt";
+	ifstream fin;
+	fin.open(fileName);
+
+	if (fin.fail()) {
+		cout << "Error in file opening!" << endl;
+		return;
+	}
+	string tmp1, tmp2;
+	while (getline(fin, tmp1, ';')) {
+		if (tmp1 == "\n") 
+			break;
+		getline(fin, tmp2, ';');
+		history[tmp1] = tmp2;
+	}
+	fin.close();
+}
+
+void Shop::printHistory(string date) {
+	if (date == "") {
+		map<string, string>::iterator ptr;
+		for (ptr = history.begin(); ptr != history.end(); ptr ++) {
+			cout << (*ptr).first << endl;
+			cout << (*ptr).second << endl;
+		}
+	} 
+	else {
+		map<string, string>::iterator ptr;
+		ptr = history.find(date);
+		if (ptr != history.end()) {
+			cout << (*ptr).first << endl;
+			cout << (*ptr).second << endl;
+		}
+		else {
+			cout << "No history record found" << endl;
+		}
+	} 	
+}
+
+void Shop::writeHistory() {
+	time_t now = time(0);
+   	tm *ltm = localtime(&now);
+   	string date = to_string(1900 + ltm->tm_year) + '/' + to_string(1 + ltm->tm_mon) + '/' + to_string(ltm->tm_mday);
+   	string time = to_string(ltm->tm_hour) + ':' + to_string(ltm->tm_min) + ':' + to_string(ltm->tm_sec);
+   	
+   	string data;
+   	vector<Commodity>::iterator ptr;
+   	sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), nameAscending);
+   	data += "Recorded at time: " + time + "\n\n";
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		data += "Name: " + (*ptr).getName() + '\n';
+		data += "Category: " + (*ptr).getCategory() + '\n';
+		data += "Price: " + to_string((*ptr).getPrice()) + '\n';
+		data += "Quantity: " + to_string((*ptr).getQuantity(shopName)) + "\n\n";
+	}
+	history[date] = data;
+	
+	string fileName = shopName + "History.txt";
+	ofstream fout;
+	fout.open(fileName);
+
+	if (fout.fail()) {
+		cout << "Error in file opening!" << endl;
+		return;
+	}
+	
+	map<string, string>::iterator ptr1;
+	for (ptr1 = history.begin(); ptr1 != history.end(); ptr1 ++) {
+		fout << (*ptr1).first;
+		fout << ';';
+		fout << (*ptr1).second;
+		fout << ';';
+	}
+	
+	fout.close();
+}
+
+void Shop::deleteHistory(string date) {
+	map<string, string>::iterator ptr;
+	ptr = history.find(date);
+	if (ptr != history.end()) {
+		history.erase(ptr);
+	}
+}
+
+void Shop::clearHistory() {
+	history.clear();
+}
+
+void Shop::readAllHistory() {
+	string fileName = "History.txt";
+	ifstream fin;
+	fin.open(fileName);
+
+	if (fin.fail()) {
+		cout << "Error in file opening!" << endl;
+		return;
+	}
+	string tmp1, tmp2;
+	while (getline(fin, tmp1, ';')) {
+		if (tmp1 == "\n") 
+			break;
+		getline(fin, tmp2, ';');
+		Shop::allHistory[tmp1] = tmp2;
+	}
+	fin.close();
+}
+
+void Shop::printAllHistory(string date) {
+	if (date == "") {
+		map<string, string>::iterator ptr;
+		for (ptr = Shop::allHistory.begin(); ptr != Shop::allHistory.end(); ptr ++) {
+			cout << (*ptr).first << endl;
+			cout << (*ptr).second << endl;
+		}
+	} 
+	else {
+		map<string, string>::iterator ptr;
+		ptr = Shop::allHistory.find(date);
+		if (ptr != Shop::allHistory.end()) {
+			cout << (*ptr).first << endl;
+			cout << (*ptr).second << endl;
+		}
+		else {
+			cout << "No history record found" << endl;
+		}
+	} 	
+}
+
+void Shop::writeAllHistory() {
+	time_t now = time(0);
+   	tm *ltm = localtime(&now);
+   	string date = to_string(1900 + ltm->tm_year) + '/' + to_string(1 + ltm->tm_mon) + '/' + to_string(ltm->tm_mday);
+   	string time = to_string(ltm->tm_hour) + ':' + to_string(ltm->tm_min) + ':' + to_string(ltm->tm_sec);
+   	
+   	string data;
+   	vector<Commodity>::iterator ptr;
+   	sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), nameAscending);
+   	data += "Recorded at time: " + time + "\n\n";
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		data += "Name: " + (*ptr).getName() + '\n';
+		data += "Category: " + (*ptr).getCategory() + '\n';
+		data += "Price: " + to_string((*ptr).getPrice()) + '\n';
+		data += "Quantity: " + '\n';
+		vector<Shop>::iterator shopptr;
+		for (shopptr = Shop::listOfShop.begin(); shopptr != Shop::listOfShop.end(); shopptr ++) {
+			data += (*shopptr).getShopName() + ": " + to_string((*ptr).getQuantity((*shopptr).getShopName())) + '\n';
+		}
+		data += "Total Quantites: " + to_string((*ptr).getTotalQuantity()) + "\n\n";	
+	}
+	
+	Shop::allHistory[date] = data;
+	
+	string fileName = "History.txt";
+	ofstream fout;
+	fout.open(fileName);
+
+	if (fout.fail()) {
+		cout << "Error in file opening!" << endl;
+		return;
+	}
+	
+	map<string, string>::iterator ptr1;
+	for (ptr1 = Shop::allHistory.begin(); ptr1 != Shop::allHistory.end(); ptr1 ++) {
+		fout << (*ptr1).first;
+		fout << ';';
+		fout << (*ptr1).second;
+		fout << ';';
+	}
+	
+	fout.close();
+}
+
+void Shop::deleteAllHistory(string date) {
+	map<string, string>::iterator ptr;
+	ptr = Shop::allHistory.find(date);
+	if (ptr != Shop::allHistory.end()) {
+		Shop::allHistory.erase(ptr);
+	}
+}
+
+void Shop::clearAllHistory() {
+	Shop::allHistory.clear();
 }
 
 void Shop::debug() {

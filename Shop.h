@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 #include "Commodity.h"
 
 using namespace std;
@@ -21,11 +22,18 @@ class Shop{
 		static vector<Commodity> listOfCommodity;
 		static vector<Shop> listOfShop;
 		static vector<Commodity*> filterAllList;
+		static map<string, string> allHistory;
 		
 		static void readData(string filename);
 		static void readShopData(string filename);
 		static void writeData(string filename);
 		static void writeShopData(string filename);
+		
+		static void readAllHistory();
+		static void printAllHistory(string date = "");
+		static void writeAllHistory();
+		static void deleteAllHistory(string date);
+		static void clearAllHistory();
 		
 		static void addCommodity(Commodity& element);
 		static void printAllCommodity(int mode);
@@ -45,12 +53,18 @@ class Shop{
 		void filter(int mode, double lowerBound, double upperBound);
 		void sortCommodity(int mode, int order);
 		void printCommodity(int mode);
+		void readHistory();
+		void printHistory(string date = "");
+		void writeHistory();
+		void deleteHistory(string date);
+		void clearHistory();
 		
 		void debug();
 		
 	private:
 		string shopName;
 		vector<Commodity*> filterList;
+		map<string, string> history;
 };
 
 #endif
