@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip> 
 #include "Commodity.h"
 #include "Shop.h"
 
@@ -17,7 +18,7 @@ int main() {
 	cout << endl;
 	cout << setfill('*') << setw(30) << endl;
 	
-	while(True) {
+	while(rue) {
 		cout << "Please choose an option: " << endl;
 		cout << "1. Enter a Shop" << '\t' << "2. Create a Shop" << endl;
 		int choice;
