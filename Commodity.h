@@ -20,7 +20,9 @@ class Commodity{
 		void setCategory(string c);
 		void setPrice(double p);
 		void setShopQuantity(string shop, int quantity);
+		bool isShopPresent(string shop);
 		void printDetails();
+		void printDetails(string shop);
 		
 	private:
 		map<string, int> quantity;

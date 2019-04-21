@@ -59,6 +59,12 @@ void Commodity::setShopQuantity(string shop, int q) {
 	totalQuantity += quantity[shop];
 }
 
+bool Commodity::isShopPresent(string shop) {
+	if (quantity.find(shop) != quantity.end())
+		return true;
+	return false;
+}
+
 void Commodity::printDetails() {
 	cout << "Name: " << name << endl;
 	cout << "Category: " << category << endl;
@@ -71,6 +77,15 @@ void Commodity::printDetails() {
 	cout << "Total quantities: " << totalQuantity << endl;
 	cout << endl;
 }
+
+void Commodity::printDetails(string shop) {
+	cout << "Name: " << name << endl;
+	cout << "Category: " << category << endl;
+	cout << "Price: " << price << endl;
+	cout << "Quantities: " << quantity[shop] << endl;
+	cout << endl;
+}
+
 
 
 

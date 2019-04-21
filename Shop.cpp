@@ -8,6 +8,16 @@
 
 vector<Commodity> Shop::listOfCommodity;
 
+Shop::Shop(string n) {
+	shopName = n;
+	vector<Commodity>::iterator ptr;
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		if((*ptr).isShopPresent(shopName)) {
+			shopCommodityList.push_back(&(*ptr));
+		}
+	}
+}
+
 void Shop::readData(string filename) {
 	string CommodityInformation;
 	string commodityName;
@@ -47,4 +57,11 @@ void Shop::readData(string filename) {
 
 void Shop::addCommodity(const Commodity& element) {
 	Shop::listOfCommodity.push_back(element);
+}
+
+void Shop::printCommodity() {
+	vector<Commodity*>::iterator ptr;
+	for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
+		(*(*ptr)).printDetails(shopName);
+	}
 }
