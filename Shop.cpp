@@ -87,6 +87,7 @@ void Shop::filter(int mode, double lowerBound, double upperBound) {
 	filterList.clear();
 	switch (mode) {
 		case 2:
+		{
 			int lb = (int)lowerBound;
 			int ub = (int)upperBound;
 			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
@@ -96,13 +97,16 @@ void Shop::filter(int mode, double lowerBound, double upperBound) {
 			}
 			printCommodity(1);
 			break;
+		}
 		case 3:
+		{
 			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
 				if (((*(*ptr)).getPrice() >= lowerBound) && ((*(*ptr)).getPrice() <= upperBound)){
 					filterList.push_back((*ptr));
 				}
 			}
 			printCommodity(1);
+		}
 	}
 }
 
