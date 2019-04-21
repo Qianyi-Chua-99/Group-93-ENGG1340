@@ -48,29 +48,6 @@ int main() {
 
 		}
 
-		//execute function based on chooseShop and choice. Maybe can be put back into switch
-
-		//can make a function of the validation process.
-
-	}
-
-
-
-
-//Shop::sayHello();
-/*
-	Commodity newCommodity("testing", "testingCategory", 10);
-	newCommodity.printDetails();
-
-	newCommodity.setShopQuantity("Tesco", 10);
-	newCommodity.setShopQuantity("Giant", 20);
-	newCommodity.printDetails();
-
-	newCommodity.setShopQuantity("Giant", 30);
-	newCommodity.printDetails();
-
-	cout << newCommodity.getQuantity("Giant") << endl;
-*/
 	return 0;
 }
 

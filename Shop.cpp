@@ -20,7 +20,6 @@ void Shop::readData(string filename) {
 		cout << "Error in file opening!" << endl;
 		return;
 	}
-
 	while (getline(fin, CommodityInformation)) {
 		istringstream iss(CommodityInformation);
 		getline(iss, commodityName, ',');
@@ -28,8 +27,6 @@ void Shop::readData(string filename) {
 		getline(iss, tmp, ',');
 		double price = stoi(tmp);
 		Commodity newCommodity (commodityName, category, price);
-		string shopName;
-		Shop shopName; //Iḿ not too sure how everything works yet but this is to set the Shop name as a class
 		int quantity;
 		bool paired = false;
 		while (getline(iss, tmp, ',')) {
@@ -45,5 +42,4 @@ void Shop::readData(string filename) {
 		}
 		Shop::listOfCommodity.push_back(newCommodity);
 	}
-
 }

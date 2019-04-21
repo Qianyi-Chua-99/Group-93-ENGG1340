@@ -13,7 +13,6 @@ class Shop{
 		static vector<Commodity> listOfCommodity;
 		static void readData(string filename);
 	private:
-
 };
 
 #endif
