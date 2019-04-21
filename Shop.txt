@@ -1,1 +1,1 @@
-ParknShop,Wellcome,Guardian,Manning
+ParknShop,Wellcome,Guardian,Manning,Giant,

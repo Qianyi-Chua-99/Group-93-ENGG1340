@@ -24,6 +24,9 @@ class Shop{
 		
 		static void readData(string filename);
 		static void readShopData(string filename);
+		static void writeData(string filename);
+		static void writeShopData(string filename);
+		
 		static void addCommodity(Commodity& element);
 		static void printAllCommodity(int mode);
 		static void sortAllCommodity(int mode, int order);

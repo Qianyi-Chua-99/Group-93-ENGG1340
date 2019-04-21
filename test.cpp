@@ -7,11 +7,13 @@
 using namespace std;
 
 int main() {
-	Shop::readData("Information.txt");
+	Shop::readData("Information1.txt");
 	Shop::readShopData("Shop.txt");
 	//Shop newShop("Wellcome");
 	Commodity newCommodity ("Orange", "Fruit", 9);
-	Shop::addCommodity(newCommodity);
+	Shop::writeShopData("Shop.txt");
+	Shop::writeData("Information1.txt");
+	/*
 	Shop::printAllCommodity(1);
 	cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$" << endl;
 	Shop::sortAllCommodity(Shop::NAME, Shop::ASCENDING);
@@ -39,6 +41,7 @@ int main() {
 	cout << "#####################################################" << endl;
 	Shop::filterAll(Shop::QUANTITY, 0, 20);
 	cout << "#####################################################" << endl;
+	*/
 	//Shop newShop("Wellcome");
 	//vector<Commodity>::iterator ptr;
 	/*

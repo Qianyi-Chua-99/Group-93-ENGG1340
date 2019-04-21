@@ -70,6 +70,35 @@ void Shop::readData(string filename) {
 		}
 		Shop::listOfCommodity.push_back(newCommodity);
 	}
+	fin.close();
+}
+
+void Shop::writeData(string filename) {
+	ofstream fout;
+	fout.open(filename);
+
+	if (fout.fail()) {
+		cout << "Error in file opening!" << endl;
+		return;
+	}
+	
+	string tmp = "";
+	vector<Commodity>::iterator ptr;
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		tmp = "";
+		tmp += (*ptr).getName() + ',';
+		tmp += (*ptr).getCategory() + ',';
+		tmp += to_string((*ptr).getPrice()) + ',';
+		vector<Shop>::iterator ptr1;
+		for (ptr1 = Shop::listOfShop.begin(); ptr1 < Shop::listOfShop.end(); ptr1++) {
+			tmp += (*ptr1).getShopName() + ',';
+			tmp += to_string((*ptr).getQuantity((*ptr1).getShopName())) + ',';
+		}
+		tmp += '\n';
+		fout << tmp;
+	}
+	
+	fout.close();
 }
 
 void Shop::readShopData(string filename) {
@@ -88,15 +117,34 @@ void Shop::readShopData(string filename) {
 			Shop newShop(tmp);
 		}
 	}
+	fin.close();
+}
+
+void Shop::writeShopData(string filename) {
+	string tmp = "";
+	ofstream fout;
+	fout.open(filename);
+
+	if (fout.fail()) {
+		cout << "Error in file opening!" << endl;
+		return;
+	}
+	vector<Shop>::iterator ptr;
+	for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr++) {
+		tmp += (*ptr).getShopName();
+		tmp += ',';
+	}
+	fout << tmp;
+	fout.close();
 }
 
 void Shop::addCommodity(Commodity& element) {
 	vector<Shop>::iterator ptr;
-	for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr ++) {
+	for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr++) {
 		if(!element.isShopPresent((*ptr).getShopName())) {
 			element.setShopQuantity((*ptr).getShopName(), 0);
 		}
-	};
+	}
 	Shop::listOfCommodity.push_back(element);
 }
 
