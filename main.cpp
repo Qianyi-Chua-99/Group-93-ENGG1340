@@ -6,15 +6,43 @@
 
 using namespace std;
 
+void EnterShop();
+void CreateShop();
+string shop_name;
+void EnterShop_Options();
+void CreateShop_Functions();
+	
+void EnterShop() {
+	/*print all shop names
+	if valid option, continue on with inventory choices*/
+		EnterShop_Options();
+	//else
+	cout << "Invalid option! Please choose again: " << endl;
+}
+	
+void CreateShop() {
+	cin >> shop_name; //add to Shop constructor
+	if (shop_name.length() > 0) {
+		CreateShop_Options();
+	}
+	else
+		cout << "Invalid shop name! Please re-enter shop name: " << endl;
+}
+
+void EnterShop_Options() {
+	cout << "1. All Commodities in Shop" << endl;
+	cout << "2. Show Commodity History" << endl;
+	cout << "3. Update Commodity Information" << endl;
+	cout << "4. Remove Commodity" << endl;
+	cout << "5. Filter Commodities" << endl;
+	cout << "6. Exit" << endl;	
+}
+
 int main() {
 
 	//initialize everything
 	Shop::readData("Information.txt");
 
-	void EnterShop();
-	void CreateShop();
-	void Inventory_Options();
-	
 	//Welcome message
 	cout << "******************************" << endl;
 	cout << " Welcome to Inventory System! " << endl;
@@ -37,19 +65,8 @@ int main() {
 			CreateShop()
 			break;
 		default:
-			cout << "Option Invalid! Please choose again: " << endl;
+			cout << "Invalid option! Please choose again: " << endl;
 		}
 		
 	}
 	
-
-	void EnterShop() {
-		/*print all shop names
-		if valid option, continue on with inventory choices*/
-		Inventory_Options();
-		//else
-		cout << "Option Invalid! Please choose again: " << endl;
-	}
-	
-	void CreateShop() {
-	}
