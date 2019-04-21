@@ -26,13 +26,13 @@ class Shop{
 		Shop(string n);
 		void filter(int mode, string category);
 		void filter(int mode, double lowerBound, double upperBound);
+		void sortCommodity(int mode, int order);
 		void printCommodity(int mode);
-
+		
 	private:
 		string shopName;
 		
 		vector<Commodity*> shopCommodityList;
-		vector<Commodity*> sortedList;
 		vector<Commodity*> filterList;
 };
 

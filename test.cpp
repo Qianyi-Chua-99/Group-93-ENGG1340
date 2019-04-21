@@ -18,6 +18,21 @@ int main() {
 	*/
 	Shop newShop("Wellcome");
 	
-	newShop.filter(Shop::PRICE, 0, 20);
+	newShop.sortCommodity(Shop::NAME, Shop::ASCENDING);
+	cout << "#####################################################" << endl;
+	newShop.sortCommodity(Shop::NAME, Shop::DESCENDING);
+	cout << "#####################################################" << endl;
+	newShop.sortCommodity(Shop::CATEGORY, Shop::ASCENDING);
+	cout << "#####################################################" << endl;
+	newShop.sortCommodity(Shop::CATEGORY, Shop::DESCENDING);
+	cout << "#####################################################" << endl;
+	newShop.sortCommodity(Shop::QUANTITY, Shop::ASCENDING);
+	cout << "#####################################################" << endl;
+	newShop.sortCommodity(Shop::QUANTITY, Shop::DESCENDING);
+	cout << "#####################################################" << endl;
+	newShop.sortCommodity(Shop::PRICE, Shop::ASCENDING);
+	cout << "#####################################################" << endl;
+	newShop.sortCommodity(Shop::PRICE, Shop::DESCENDING);
+	cout << "#####################################################" << endl;
 	return 0;
 }
