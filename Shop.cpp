@@ -19,6 +19,7 @@ int Shop::DESCENDING = 1;
 
 vector<Commodity> Shop::listOfCommodity {};
 vector<Shop> Shop::listOfShop {};
+vector<Commodity*> Shop::filterAllList {};
 
 string SHOPNAME;
 
@@ -162,6 +163,49 @@ void Shop::alertOutOfStock () {
 	}
 }
 
+void Shop::filterAll(int mode, string category) {
+	vector<Commodity>::iterator ptr;
+	filterAllList.clear();
+	switch (mode) {
+		case 1:
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				if ((*ptr).getCategory() == category){
+					filterAllList.push_back(&(*ptr));
+				}
+			}
+			printAllCommodity(0);
+			break;
+	}
+}
+
+void Shop::filterAll(int mode, double lowerBound, double upperBound) {
+	vector<Commodity>::iterator ptr;
+	filterAllList.clear();
+	switch (mode) {
+		case 2:
+		{
+			int lb = (int)lowerBound;
+			int ub = (int)upperBound;
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				if (((*ptr).getTotalQuantity() >= lb) && ((*ptr).getTotalQuantity() <= ub)){
+					filterAllList.push_back(&(*ptr));
+				}
+			}
+			printAllCommodity(0);
+			break;
+		}
+		case 3:
+		{
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				if (((*ptr).getPrice() >= lowerBound) && ((*ptr).getPrice() <= upperBound)){
+					filterAllList.push_back(&(*ptr));
+				}
+			}
+			printAllCommodity(0);
+		}
+	}
+}
+
 void Shop::filter(int mode, string category) {
 	vector<Commodity>::iterator ptr;
 	filterList.clear();
@@ -226,7 +270,15 @@ bool quantityAscending(Commodity A, Commodity B) {
 }
 
 bool quantityDescending(Commodity A, Commodity B) {
-	return (((A).getQuantity(SHOPNAME)) > ((B).getQuantity(SHOPNAME)));
+	return (((A).getTotalQuantity()) > ((B).getTotalQuantity()));
+}
+
+bool quantityAllAscending(Commodity A, Commodity B) {
+	return (((A).getTotalQuantity()) < ((B).getTotalQuantity()));
+}
+
+bool quantityAllDescending(Commodity A, Commodity B) {
+	return (((A).getTotalQuantity()) > ((B).getTotalQuantity()));
 }
 
 bool priceAscending(Commodity A, Commodity B) {
@@ -275,6 +327,44 @@ void Shop::sortCommodity(int mode, int order) {
 	printCommodity(1);
 }
 
+void Shop::sortAllCommodity(int mode, int order) {
+	switch (mode) {
+		case 0:
+		{
+			if (order == Shop::ASCENDING)
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), nameAscending);
+			else
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), nameDescending);
+			break;
+		}
+		case 1:
+		{
+			if (order == Shop::ASCENDING)
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), categoryAscending);
+			else
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), categoryDescending);
+			break;
+		}
+		case 2:
+		{
+			if (order == Shop::ASCENDING)
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), quantityAllAscending);
+			else
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), quantityAllDescending);
+			break;
+		}
+		case 3:
+		{
+			if (order == Shop::ASCENDING)
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), priceAscending);
+			else
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), priceDescending);
+			break;
+		}
+	}
+	printAllCommodity(1);
+}
+
 void Shop::printCommodity(int mode) {
 	switch (mode) {
 		case 0:
@@ -293,6 +383,37 @@ void Shop::printCommodity(int mode) {
 			}
 		}
 	}
+}
+
+void Shop::printAllCommodity(int mode) {
+	switch (mode) {
+		case 0:
+		{
+			vector<Commodity*>::iterator ptr1;
+			for (ptr1 = Shop::filterAllList.begin(); ptr1 < Shop::filterAllList.end(); ptr1 ++) {
+				(*(*ptr1)).printDetails();
+			}
+			break;
+		}
+		default:
+		{
+			vector<Commodity>::iterator ptr;
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				(*ptr).printDetails();
+			}
+		}
+	}
+}
+
+
+void Shop::printSpecificCommodity(string n) {
+	vector<Commodity>::iterator ptr;
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		if ((*ptr).getName() == n) {
+			(*ptr).printDetails(shopName);
+			break;
+		}
+	}	
 }
 
 void Shop::debug() {

@@ -12,6 +12,33 @@ int main() {
 	//Shop newShop("Wellcome");
 	Commodity newCommodity ("Orange", "Fruit", 9);
 	Shop::addCommodity(newCommodity);
+	Shop::printAllCommodity(1);
+	cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$" << endl;
+	Shop::sortAllCommodity(Shop::NAME, Shop::ASCENDING);
+	cout << "#####################################################" << endl;
+	Shop::sortAllCommodity(Shop::NAME, Shop::DESCENDING);
+	cout << "#####################################################" << endl;
+	Shop::sortAllCommodity(Shop::CATEGORY, Shop::ASCENDING);
+	cout << "#####################################################" << endl;
+	Shop::sortAllCommodity(Shop::CATEGORY, Shop::DESCENDING);
+	cout << "#####################################################" << endl;
+	Shop::sortAllCommodity(Shop::QUANTITY, Shop::ASCENDING);
+	cout << "#####################################################" << endl;
+	cout << "QUANTITY Descending" << endl;
+	Shop::sortAllCommodity(Shop::QUANTITY, Shop::DESCENDING);
+	cout << "#####################################################" << endl;
+	Shop::sortAllCommodity(Shop::PRICE, Shop::ASCENDING);
+	cout << "#####################################################" << endl;
+	Shop::sortAllCommodity(Shop::PRICE, Shop::DESCENDING);
+	cout << "#####################################################" << endl;
+	Shop::filterAll(Shop::CATEGORY, "Electronic");
+	cout << "#####################################################" << endl;
+	Shop::filterAll(Shop::CATEGORY, "Vegetable");
+	cout << "#####################################################" << endl;
+	Shop::filterAll(Shop::PRICE, 0, 20);
+	cout << "#####################################################" << endl;
+	Shop::filterAll(Shop::QUANTITY, 0, 20);
+	cout << "#####################################################" << endl;
 	//Shop newShop("Wellcome");
 	//vector<Commodity>::iterator ptr;
 	/*
@@ -57,11 +84,13 @@ int main() {
 	
 	//Shop newShop1("ParknShop");
 	//newShop1.printCommodity(1);
+	/*
 	vector<Shop>::iterator ptr;
 	for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr ++) {
 		cout << (*ptr).getShopName() << endl;
-		(*ptr).alertOutOfStock();
+		(*ptr).printSpecificCommodity("Surface");
 		cout << "###########################################################" << endl;
 	}
+	*/
 	
 }

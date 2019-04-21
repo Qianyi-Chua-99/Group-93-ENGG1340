@@ -20,16 +20,22 @@ class Shop{
 		
 		static vector<Commodity> listOfCommodity;
 		static vector<Shop> listOfShop;
+		static vector<Commodity*> filterAllList;
 		
 		static void readData(string filename);
 		static void readShopData(string filename);
 		static void addCommodity(Commodity& element);
+		static void printAllCommodity(int mode);
+		static void sortAllCommodity(int mode, int order);
+		static void filterAll(int mode, string category);
+		static void filterAll(int mode, double lowerBound, double upperBound);
 		
 		Shop(string n);
 		string getShopName();
 		void setCommodityQuantity(string n, int quantity);
 		void setCommodityPrice(string n, double price);
 		void setCommodityCategory(string n, string category);
+		void printSpecificCommodity(string n);
 		void deleteCommodity(string n);
 		void alertOutOfStock();
 		void filter(int mode, string category);
