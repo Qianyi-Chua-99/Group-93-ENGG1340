@@ -10,13 +10,13 @@ using namespace std;
 
 class Shop{
 	public:
-		static void int NAME = 0;
-		static void int CATEGORY = 1;
-		static void int QUANTITY = 2;
-		static void int PRICE = 3;
+		static int NAME;
+		static int CATEGORY;
+		static int QUANTITY;
+		static int PRICE;
 		
-		static void int ASCENDING = 0;
-		static void int DESCENDING = 1;
+		static int ASCENDING;
+		static int DESCENDING;
 		
 		static vector<Commodity> listOfCommodity;
 		
@@ -24,7 +24,9 @@ class Shop{
 		static void addCommodity(const Commodity& element);
 		
 		Shop(string n);
-		void printCommodity();
+		void filter(int mode, string category);
+		void filter(int mode, double lowerBound, double upperBound);
+		void printCommodity(int mode);
 
 	private:
 		string shopName;
