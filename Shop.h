@@ -13,6 +13,13 @@ class Shop{
 		static vector<Commodity> listOfCommodity;
 		static void readData(string filename);
 		static void addCommodity(const Commodity& element);
+		static void int NAME = 0;
+		static void int CATEGORY = 1;
+		static void int QUANTITY = 2;
+		static void int PRICE = 3;
+		static void int ASCENDING = 4;
+		static void int DESCENDING = 5;
+		
 	private:
 };
 
