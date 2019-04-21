@@ -6,6 +6,14 @@
 #include "Shop.h"
 #include "Commodity.h"
 
+int Shop::NAME = 0;
+int Shop::CATEGORY = 1;
+int Shop::QUANTITY = 2;
+int Shop::PRICE = 3;
+		
+int Shop::ASCENDING = 0;
+int Shop::DESCENDING = 1;
+
 vector<Commodity> Shop::listOfCommodity;
 
 Shop::Shop(string n) {
@@ -59,9 +67,61 @@ void Shop::addCommodity(const Commodity& element) {
 	Shop::listOfCommodity.push_back(element);
 }
 
-void Shop::printCommodity() {
+void Shop::filter(int mode, string category) {
 	vector<Commodity*>::iterator ptr;
-	for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
-		(*(*ptr)).printDetails(shopName);
+	filterList.clear();
+	switch (mode) {
+		case 1:
+			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
+				if ((*(*ptr)).getCategory() == category){
+					filterList.push_back((*ptr));
+				}
+			}
+			printCommodity(1);
+			break;
+	}
+}
+
+void Shop::filter(int mode, double lowerBound, double upperBound) {
+	vector<Commodity*>::iterator ptr;
+	filterList.clear();
+	switch (mode) {
+		case 2:
+			int lb = (int)lowerBound;
+			int ub = (int)upperBound;
+			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
+				if (((*(*ptr)).getQuantity(shopName) >= lb) && ((*(*ptr)).getQuantity(shopName) <= ub)){
+					filterList.push_back((*ptr));
+				}
+			}
+			printCommodity(1);
+			break;
+		case 3:
+			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
+				if (((*(*ptr)).getPrice() >= lowerBound) && ((*(*ptr)).getPrice() <= upperBound)){
+					filterList.push_back((*ptr));
+				}
+			}
+			printCommodity(1);
+	}
+}
+
+void Shop::printCommodity(int mode) {
+	vector<Commodity*>::iterator ptr;
+	switch (mode) {
+		case 0:
+			for (ptr = Shop::sortedList.begin(); ptr < Shop::sortedList.end(); ptr ++) {
+				(*(*ptr)).printDetails(shopName);
+			}
+			break;
+		case 1:
+			for (ptr = Shop::filterList.begin(); ptr < Shop::filterList.end(); ptr ++) {
+				(*(*ptr)).printDetails(shopName);
+			}
+			break;
+		default:
+			for (ptr = Shop::shopCommodityList.begin(); ptr < Shop::shopCommodityList.end(); ptr ++) {
+				(*(*ptr)).printDetails(shopName);
+			}
 	}
 }

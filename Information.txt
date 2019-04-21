@@ -1,2 +1,8 @@
 Broccoli,Vegetable,7,ParknShop,14,Wellcome,15,Guardian,100
 Apple,Fruit,9,ParknShop,104,Wellcome,15,Manning,90
+Car,Vehicle,7000,ParknShop,14,Wellcome,19,Guardian,100
+Surface,Electronic,3495,ParknShop,14,Wellcome,1,Guardian,100
+Dell XPS,Electronic,10000,ParknShop,14,Wellcome,2,Guardian,100
+Macbook Pro,Electronic,12000,ParknShop,14,Wellcome,90,Guardian,100
+Hersheys Choco,Sweet,10,ParknShop,14,Wellcome,5,Guardian,100
+Chandelier,Furniture,3000,ParknShop,14,Wellcome,159,Guardian,100

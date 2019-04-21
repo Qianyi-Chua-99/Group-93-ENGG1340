@@ -17,6 +17,7 @@ int main() {
 	}
 	*/
 	Shop newShop("Wellcome");
-	newShop.printCommodity();
+	
+	newShop.filter(Shop::PRICE, 0, 20);
 	return 0;
 }
