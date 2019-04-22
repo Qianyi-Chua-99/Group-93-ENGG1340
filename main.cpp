@@ -14,7 +14,7 @@ void EnterShop_Options();
 void CreateShop_Options();
 void Print_History();
 
-void Print_History(); {
+void Print_History() {
 	string date;
 	int choice;
 	cout << "1. Print commodity history of a specific date " << endl;
@@ -27,10 +27,10 @@ void Print_History(); {
 		case 1:
 			cout << "Please enter a date (YYYY/MM/DD): " << endl;
 			cin >> date;
-			Shop::printHistory(date);
+			Shop::listOfShop[CURRENTSHOP].printHistory(date);
 			break;
 		case 2:
-		 	printHistory();
+		 	Shop::listOfShop[CURRENTSHOP].printHistory();
 		 	break;
 		case 3:
 			return;
@@ -55,9 +55,10 @@ void EnterShop() {
 		cout << i+1 << ". " << Shop::listOfShop[i].getShopName() << endl;
 	}
 	cin >> choice;
-	if (choice < Shop::listOfShop.size()+1 && choice > 0) //valid option, continue on with inventory choices*/
+	if (choice < Shop::listOfShop.size()+1 && choice > 0) { //valid option, continue on with inventory choices*/
 		CURRENTSHOP = choice-1;
 		EnterShop_Options();
+	}
 	else
 		cout << "Invalid option! Please choose again: " << endl;
 }
@@ -88,7 +89,8 @@ void EnterShop_Options() {
 	cout << "5. Remove Commodity" << endl;
 	cout << "6. Filter Commodities" << endl;
 	cout << "7. Out-of-Stock Commodites" << endl;
-	cout << "8. Exit" << endl;	
+	cout << "8. Return to previous menu" << endl;
+	cout << "9. Exit" << endl;	
 	
 	int choice = 0;
 	cin >> choice;
@@ -96,7 +98,7 @@ void EnterShop_Options() {
 	while (true) {
 		switch (choice) {
 		case 1:
-			Shop::listOfShop[CURRENTSHOP].printCommodities(1);
+			Shop::listOfShop[CURRENTSHOP].printCommodity(1);
 			break;
 		case 2:
 			//print commodity history
@@ -158,6 +160,7 @@ int main() {
 	//initialize everything
 	Shop::readData("Information1.txt");
 	Shop::readShopData("Shop.txt");
+	Shop::readAllHistory();
 	//Welcome message
 	cout << "******************************" << endl;
 	cout << " Welcome to Inventory System! " << endl;
