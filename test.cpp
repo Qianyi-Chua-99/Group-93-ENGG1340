@@ -8,13 +8,19 @@
 #include "Commodity.h"
 
 using namespace std;
-
+bool checkIsDouble(string inputString, double &result) {
+    	char* end;
+    	result = strtod(inputString.c_str(), &end);
+    	if (end == inputString.c_str() || *end != '\0') return false;
+    		return true;
+}	
 int main() {
-	string s ="    ";
-	bool good = all_of(s.begin(),s.end(),isspace);
-	if(good) {
-		cout << "True" << endl;
-	}
+	double result;
+	cout << checkIsDouble ("1", result) << endl;
+	cout << checkIsDouble ("1.44", result) << endl;
+	cout << checkIsDouble ("1.542.535", result) << endl;
+	cout << checkIsDouble ("fdada", result) << endl;
+	cout << checkIsDouble ("1323fdsfds", result) << endl;
 /*
 	Shop::readData("Information1.txt");
 	Shop::readShopData("Shop.txt");
