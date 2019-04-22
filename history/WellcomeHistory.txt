@@ -45,7 +45,7 @@ Category: Electronic
 Price: 3495.000000
 Quantity: 1
 
-;2019/04/22;Recorded at time: 18:3:42
+;2019/04/22;Recorded at time: 23:27:50
 
 Name: Apple
 Category: Fruit

@@ -302,43 +302,43 @@ void Shop::filter(int mode, double lowerBound, double upperBound) {
 	}
 }
 
-bool nameAscending(Commodity A, Commodity B) {
+bool nameAscending(Commodity& A, Commodity& B) {
 	return (((A).getName()) < ((B).getName()));
 }
 
-bool nameDescending(Commodity A, Commodity B) {
+bool nameDescending(Commodity& A, Commodity& B) {
 	return (((A).getName()) > ((B).getName()));
 }
 
-bool categoryAscending(Commodity A, Commodity B) {
+bool categoryAscending(Commodity& A, Commodity& B) {
 	return (((A).getCategory()) < ((B).getCategory()));
 }
 
-bool categoryDescending(Commodity A, Commodity B) {
+bool categoryDescending(Commodity& A, Commodity& B) {
 	return ((A.getCategory()) > (B.getCategory()));
 }
 
-bool quantityAscending(Commodity A, Commodity B) {
+bool quantityAscending(Commodity& A, Commodity& B) {
 	return (((A).getQuantity(SHOPNAME)) < ((B).getQuantity(SHOPNAME)));
 }
 
-bool quantityDescending(Commodity A, Commodity B) {
+bool quantityDescending(Commodity& A, Commodity& B) {
 	return (((A).getTotalQuantity()) > ((B).getTotalQuantity()));
 }
 
-bool quantityAllAscending(Commodity A, Commodity B) {
+bool quantityAllAscending(Commodity& A, Commodity& B) {
 	return (((A).getTotalQuantity()) < ((B).getTotalQuantity()));
 }
 
-bool quantityAllDescending(Commodity A, Commodity B) {
+bool quantityAllDescending(Commodity& A, Commodity& B) {
 	return (((A).getTotalQuantity()) > ((B).getTotalQuantity()));
 }
 
-bool priceAscending(Commodity A, Commodity B) {
+bool priceAscending(Commodity& A, Commodity& B) {
 	return (((A).getPrice()) < ((B).getPrice()));
 }
 
-bool priceDescending(Commodity A, Commodity B) {
+bool priceDescending(Commodity& A, Commodity& B) {
 	return (((A).getPrice()) > ((B).getPrice()));
 }
 
