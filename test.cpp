@@ -19,20 +19,13 @@ int main() {
 	
 	//Shop::listOfShop[0].alertOutOfStock();
 	
-	time_t now = time(0);
-
-   	tm *ltm = localtime(&now);
    	
-   	string date = to_string(1900 + ltm->tm_year) + '/' + to_string(1 + ltm->tm_mon) + '/' + to_string(ltm->tm_mday);
-   	string time = to_string(ltm->tm_hour) + ':' + to_string(ltm->tm_min) + ':' + to_string(ltm->tm_sec);
-   	
-   	cout << date << endl;
-   	cout << time << endl;
-   	/*
    	Shop::listOfShop[0].readHistory();
    	Shop::listOfShop[0].printHistory();
    	Shop::listOfShop[0].writeHistory();
-   	*/
+   	
+   	Shop::listOfShop[0].printCommodity(1);
+   	
    	Shop::readAllHistory();
    	//Shop::deleteAllHistory("2019/4/22");
    	//Shop::printAllHistory();

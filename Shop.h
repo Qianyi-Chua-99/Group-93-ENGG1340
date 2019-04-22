@@ -19,6 +19,9 @@ class Shop{
 		static int ASCENDING;
 		static int DESCENDING;
 		
+		static string dataDirectory;
+		static string historyDirectory;
+		
 		static vector<Commodity> listOfCommodity;
 		static vector<Shop> listOfShop;
 		static vector<Commodity*> filterAllList;

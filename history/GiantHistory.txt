@@ -1,9 +1,9 @@
-2019/4/22;Recorded at time: 2:22:35
+2019/4/22;Recorded at time: 15:8:26
 
 Name: Apple
 Category: Fruit
 Price: 9.000000
-Quantity: 90
+Quantity: 0
 
 Name: Broccoli
 Category: Vegetable

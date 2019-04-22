@@ -18,6 +18,9 @@ int Shop::PRICE = 3;
 int Shop::ASCENDING = 0;
 int Shop::DESCENDING = 1;
 
+string Shop::dataDirectory = "data/";
+string Shop::historyDirectory = "history/";
+
 vector<Commodity> Shop::listOfCommodity {};
 vector<Shop> Shop::listOfShop {};
 vector<Commodity*> Shop::filterAllList {};
@@ -43,7 +46,7 @@ void Shop::readData(string filename) {
 	string category;
 	string tmp;
 	ifstream fin;
-	fin.open(filename);
+	fin.open(Shop::dataDirectory + filename);
 
 	if (fin.fail()) {
 		cout << "Error in file opening!" << endl;
@@ -77,7 +80,7 @@ void Shop::readData(string filename) {
 
 void Shop::writeData(string filename) {
 	ofstream fout;
-	fout.open(filename);
+	fout.open(Shop::dataDirectory + filename);
 
 	if (fout.fail()) {
 		cout << "Error in file opening!" << endl;
@@ -107,7 +110,7 @@ void Shop::readShopData(string filename) {
 	string ShopInformation;
 	string tmp;
 	ifstream fin;
-	fin.open(filename);
+	fin.open(dataDirectory + filename);
 
 	if (fin.fail()) {
 		cout << "Error in file opening!" << endl;
@@ -125,7 +128,7 @@ void Shop::readShopData(string filename) {
 void Shop::writeShopData(string filename) {
 	string tmp = "";
 	ofstream fout;
-	fout.open(filename);
+	fout.open(dataDirectory + filename);
 
 	if (fout.fail()) {
 		cout << "Error in file opening!" << endl;
@@ -469,7 +472,7 @@ void Shop::printSpecificCommodity(string n) {
 void Shop::readHistory() {
 	string fileName = shopName + "History.txt";
 	ifstream fin;
-	fin.open(fileName);
+	fin.open(Shop::historyDirectory + fileName);
 
 	if (fin.fail()) {
 		cout << "Error in file opening!" << endl;
@@ -526,7 +529,7 @@ void Shop::writeHistory() {
 	
 	string fileName = shopName + "History.txt";
 	ofstream fout;
-	fout.open(fileName);
+	fout.open(Shop::historyDirectory + fileName);
 
 	if (fout.fail()) {
 		cout << "Error in file opening!" << endl;
@@ -559,7 +562,7 @@ void Shop::clearHistory() {
 void Shop::readAllHistory() {
 	string fileName = "History.txt";
 	ifstream fin;
-	fin.open(fileName);
+	fin.open(Shop::historyDirectory + fileName);
 
 	if (fin.fail()) {
 		cout << "Error in file opening!" << endl;
@@ -627,7 +630,7 @@ void Shop::writeAllHistory() {
 	
 	string fileName = "History.txt";
 	ofstream fout;
-	fout.open(fileName);
+	fout.open(Shop::historyDirectory + fileName);
 
 	if (fout.fail()) {
 		cout << "Error in file opening!" << endl;
