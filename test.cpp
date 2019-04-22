@@ -73,4 +73,5 @@ int main() {
 	//Shop::writeData("Information1.txt");
 
 	return 0;
+	
 }
