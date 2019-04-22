@@ -9,26 +9,31 @@ void EnterShop();
 void CreateShop();
 void EnterShop_Options();
 void CreateShop_Functions();
+bool whiteSpaceOnly;
 	
 void EnterShop() {
-	/*print all shop names
-	if valid option, continue on with inventory choices*/
+	int choice;
+	for (int i = 0; i < Shop::listOfShop.size(); i++) {
+		cout << i << ". " << Shop::listOfShop[i] << endl;
+	}
+	cin >> choice;
+	if (choice < Shop::listOfShop.size() && choice > -1) //valid option, continue on with inventory choices*/
 		EnterShop_Options();
-	//else
+	else
 		cout << "Invalid option! Please choose again: " << endl;
 }
 	
 void CreateShop() {
-	string shop_name;
-	cin >> shop_name; //add to Shop constructor
-	while (True) {
-		if (shop_name.length() > 0) {
-			CreateShop_Options();
-			break;
-	}
-		else
+	string shop_name; 
+	while (true) {
+		cin >> shop_name;
+		if (all_of(shop_name.begin(),shop_name.end(),isspace) {
 			cout << "Invalid shop name! Please re-enter shop name: " << endl;
-	}
+		}
+		else {
+			Shop (shop_name);
+			CreateShop_Options();
+		}
 }
 
 void EnterShop_Options() {
@@ -44,7 +49,7 @@ void EnterShop_Options() {
 	int choice = 0;
 	cin >> choice;
 	
-	while (choice != 8) {
+	while (true) {
 		switch (choice) {
 		case '1':
 			//print all commodities in shop
@@ -67,6 +72,8 @@ void EnterShop_Options() {
 			//filter commodity
 		case '7':
 			//check out of stock commodities	
+		case '8':
+			return;
 		default:
 			"Invalid option! Please choose again: "
 		}
@@ -82,7 +89,7 @@ void CreateShop_Option() {
 	int choice = 0;
 	cin >> choice
 	
-	while (choice != 4){
+	while (true){
 		switch(choice){
 			case '1':
 				//add commodity
@@ -90,6 +97,8 @@ void CreateShop_Option() {
 				//remove commodity
 			case '3':
 				//update commodity
+			case '4':
+				return;
 			default:
 				"Invalid option! Please choose again: "
 		}
@@ -109,7 +118,7 @@ int main() {
 
 	while(true) {
 		cout << "Please choose an option: " << endl;
-		cout << "1. Enter a Shop" << '\t' << "2. Create a Shop" << endl;
+		cout << "1. Enter a Shop" << '\t' << "2. Create a Shop" << '\t'<< "3. Exit" << endl;
 		int choice;
 		cin >> choice;
 		switch (choice)
@@ -122,6 +131,8 @@ int main() {
 			//Create shop options fucntion
 			CreateShop()
 			break;
+		case '3':
+			return 0;
 		default:
 			cout << "Invalid option! Please choose again: " << endl;
 		}
