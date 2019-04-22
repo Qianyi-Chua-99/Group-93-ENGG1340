@@ -1,4 +1,206 @@
-2019/4/22;Recorded at time: 15:8:26
+2019/04/04;Recorded at time: 17:56:36
+
+Name: Apple
+Category: Fruit
+Price: 9.000000
+ParknShop: 104
+Wellcome: 15
+Guardian: 0
+Manning: 90
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 209
+
+Name: Broccoli
+Category: Vegetable
+Price: 7.000000
+ParknShop: 14
+Wellcome: 15
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 129
+
+Name: Car
+Category: Vehicle
+Price: 7000.000000
+ParknShop: 14
+Wellcome: 19
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 133
+
+Name: Chandelier
+Category: Furniture
+Price: 3000.000000
+ParknShop: 14
+Wellcome: 159
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 273
+
+Name: Dell XPS
+Category: Electronic
+Price: 10000.000000
+ParknShop: 14
+Wellcome: 2
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 116
+
+Name: Hersheys Choco
+Category: Sweet
+Price: 10.000000
+ParknShop: 14
+Wellcome: 5
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 119
+
+Name: Macbook Pro
+Category: Electronic
+Price: 12000.000000
+ParknShop: 14
+Wellcome: 90
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 204
+
+Name: Orange
+Category: Fruit
+Price: 9.000000
+ParknShop: 0
+Wellcome: 0
+Guardian: 0
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 0
+
+Name: Surface
+Category: Electronic
+Price: 3495.000000
+ParknShop: 14
+Wellcome: 1
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 115
+
+;2019/04/22;Recorded at time: 18:3:42
+
+Name: Apple
+Category: Fruit
+Price: 9.000000
+ParknShop: 104
+Wellcome: 15
+Guardian: 0
+Manning: 90
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 209
+
+Name: Broccoli
+Category: Vegetable
+Price: 7.000000
+ParknShop: 14
+Wellcome: 15
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 129
+
+Name: Car
+Category: Vehicle
+Price: 7000.000000
+ParknShop: 14
+Wellcome: 19
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 133
+
+Name: Chandelier
+Category: Furniture
+Price: 3000.000000
+ParknShop: 14
+Wellcome: 159
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 273
+
+Name: Dell XPS
+Category: Electronic
+Price: 10000.000000
+ParknShop: 14
+Wellcome: 2
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 116
+
+Name: Hersheys Choco
+Category: Sweet
+Price: 10.000000
+ParknShop: 14
+Wellcome: 5
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 119
+
+Name: Macbook Pro
+Category: Electronic
+Price: 12000.000000
+ParknShop: 14
+Wellcome: 90
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 204
+
+Name: Orange
+Category: Fruit
+Price: 9.000000
+ParknShop: 0
+Wellcome: 0
+Guardian: 0
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 0
+
+Name: Surface
+Category: Electronic
+Price: 3495.000000
+ParknShop: 14
+Wellcome: 1
+Guardian: 100
+Manning: 0
+Giant: 0
+Ratu Rajuk: 0
+Total Quantites: 115
+
+;2019/04/23;Recorded at time: 18:2:23
 
 Name: Apple
 Category: Fruit

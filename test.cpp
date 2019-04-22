@@ -3,12 +3,19 @@
 #include <vector>
 #include <ctime>
 #include <fstream>
+#include <algorithm>
 #include "Shop.h"
 #include "Commodity.h"
 
 using namespace std;
 
 int main() {
+	string s ="    ";
+	bool good = all_of(s.begin(),s.end(),isspace);
+	if(good) {
+		cout << "True" << endl;
+	}
+/*
 	Shop::readData("Information1.txt");
 	Shop::readShopData("Shop.txt");
 	
@@ -16,17 +23,18 @@ int main() {
 	//for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr++) {
 	//	cout << (*ptr).getShopName() << endl;
 	//}
-	
+	Shop::readAllHistory();
 	//Shop::listOfShop[0].alertOutOfStock();
-	
-   	
+	string tmp;
+	cin >> tmp;
+	string tmp1 = tmp;
+   	Shop newShop(tmp1);
    	Shop::listOfShop[0].readHistory();
    	Shop::listOfShop[0].printHistory();
    	Shop::listOfShop[0].writeHistory();
    	
    	Shop::listOfShop[0].printCommodity(1);
    	
-   	Shop::readAllHistory();
    	//Shop::deleteAllHistory("2019/4/22");
    	//Shop::printAllHistory();
    	Shop::writeAllHistory();   	
@@ -57,6 +65,6 @@ int main() {
    	
 	//Shop::writeShopData("Shop.txt");
 	//Shop::writeData("Information1.txt");
-		
+
 	return 0;
 }

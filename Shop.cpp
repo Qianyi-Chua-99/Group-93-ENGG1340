@@ -505,6 +505,7 @@ void Shop::printHistory(string date) {
 		}
 		else {
 			cout << "No history record found" << endl;
+			cout << endl;
 		}
 	} 	
 }
@@ -512,7 +513,11 @@ void Shop::printHistory(string date) {
 void Shop::writeHistory() {
 	time_t now = time(0);
    	tm *ltm = localtime(&now);
-   	string date = to_string(1900 + ltm->tm_year) + '/' + to_string(1 + ltm->tm_mon) + '/' + to_string(ltm->tm_mday);
+   	int day = ltm->tm_mday;
+   	string strDay = day < 10 ? ("0" + to_string(day)) : to_string(day);
+   	int month = 1 + ltm->tm_mon;
+   	string strMonth = month < 10 ? ("0" + to_string(month)) : to_string(month);
+   	string date = to_string(1900 + ltm->tm_year) + '/' + strMonth + '/' + strDay;
    	string time = to_string(ltm->tm_hour) + ':' + to_string(ltm->tm_min) + ':' + to_string(ltm->tm_sec);
    	
    	string data;
@@ -600,6 +605,7 @@ void Shop::printAllHistory(string date) {
 		}
 		else {
 			cout << "No history record found" << endl;
+			cout << endl;
 		}
 	}	
 }
@@ -607,7 +613,11 @@ void Shop::printAllHistory(string date) {
 void Shop::writeAllHistory() {
 	time_t now = time(0);
    	tm *ltm = localtime(&now);
-   	string date = to_string(1900 + ltm->tm_year) + '/' + to_string(1 + ltm->tm_mon) + '/' + to_string(ltm->tm_mday);
+   	int day = ltm->tm_mday;
+   	string strDay = day < 10 ? ("0" + to_string(day)) : to_string(day);
+   	int month = 1 + ltm->tm_mon;
+   	string strMonth = month < 10 ? ("0" + to_string(month)) : to_string(month);
+   	string date = to_string(1900 + ltm->tm_year) + '/' + strMonth + '/' + strDay;
    	string time = to_string(ltm->tm_hour) + ':' + to_string(ltm->tm_min) + ':' + to_string(ltm->tm_sec);
    	
    	string data;
