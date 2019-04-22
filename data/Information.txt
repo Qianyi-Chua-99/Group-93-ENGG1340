@@ -1,4 +1,4 @@
-Broccoli,Vegetable,7,ParknShop,14,Wellcome,15,Guardian,100
+Broccoli,Vegetable,7,ParknShop,14,Wellcome,15,Guardian,100,Broadway,10,Fortress,20
 Apple,Fruit,9,ParknShop,104,Wellcome,15,Manning,90
 Car,Vehicle,7000,ParknShop,14,Wellcome,19,Guardian,100
 Surface,Electronic,3495,ParknShop,14,Wellcome,1,Guardian,100

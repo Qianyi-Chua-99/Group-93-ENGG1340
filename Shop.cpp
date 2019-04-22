@@ -5,10 +5,16 @@
 #include <fstream>
 #include <algorithm>
 #include <ctime>
+#include <iomanip> 
 #include "Shop.h"
 #include "Commodity.h"
 
 using namespace std;
+
+extern int column1;
+extern int column2;
+extern int column3;
+extern int column4;
 
 int Shop::NAME = 0;
 int Shop::CATEGORY = 1;
@@ -125,6 +131,10 @@ void Shop::readShopData(string filename) {
 	fin.close();
 }
 
+bool shopAscending(Shop& A, Shop& B) {
+	return (((A).getShopName()) < ((B).getShopName()));
+}
+
 void Shop::writeShopData(string filename) {
 	string tmp = "";
 	ofstream fout;
@@ -134,6 +144,7 @@ void Shop::writeShopData(string filename) {
 		cout << "Error in file opening!" << endl;
 		return;
 	}
+	sort(Shop::listOfShop.begin(), Shop::listOfShop.end(), shopAscending);
 	vector<Shop>::iterator ptr;
 	for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr++) {
 		tmp += (*ptr).getShopName();
@@ -419,6 +430,7 @@ void Shop::sortAllCommodity(int mode, int order) {
 }
 
 void Shop::printCommodity(int mode) {
+	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Quantity" << endl;
 	switch (mode) {
 		case 0:
 		{
@@ -436,9 +448,12 @@ void Shop::printCommodity(int mode) {
 			}
 		}
 	}
+	cout << endl;
 }
 
 void Shop::printAllCommodity(int mode) {
+	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Total Quantity" << endl;
+	
 	switch (mode) {
 		case 0:
 		{

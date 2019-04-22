@@ -18,18 +18,18 @@ int main() {
 	//for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr++) {
 	//	cout << (*ptr).getShopName() << endl;
 	//}
-	Shop::readAllHistory();
+	//Shop::readAllHistory();
 	//Shop::listOfShop[0].alertOutOfStock();
-	Shop::listOfShop[0].sortCommodity(Shop::NAME, Shop::ASCENDING);
-   	Shop::listOfShop[0].readHistory();
-   	Shop::listOfShop[0].printHistory();
-   	Shop::listOfShop[0].writeHistory();
-   	
-   	Shop::listOfShop[0].printCommodity(1);
-   	
+	//Shop::listOfShop[0].sortCommodity(Shop::NAME, Shop::ASCENDING);
+   	//Shop::listOfShop[0].readHistory();
+   	//Shop::listOfShop[0].printHistory();
+   	//Shop::listOfShop[0].writeHistory();
+   	Shop::printAllCommodity(1);
+   	//Shop::listOfShop[0].printCommodity(1);
+   	Shop::writeShopData("Shop.txt");
    	//Shop::deleteAllHistory("2019/4/22");
    	//Shop::printAllHistory();
-   	Shop::writeAllHistory();   	
+   	//Shop::writeAllHistory();   	
    	/*
    	ofstream fout;
 	fout.open("ParknShopHistory.txt");

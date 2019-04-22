@@ -1,9 +1,15 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <iomanip> 
 #include "Commodity.h"
 
 using namespace std;
+
+int column1 = 20;
+int column2 = 20;
+int column3 = 15;
+int column4 = 10;
 
 Commodity::Commodity(string n, string c, double p) {
 	name = n;
@@ -67,7 +73,7 @@ bool Commodity::isShopPresent(string shop) {
 		return true;
 	return false;
 }
-
+/*
 void Commodity::printDetails() {
 	cout << "Name: " << name << endl;
 	cout << "Category: " << category << endl;
@@ -88,7 +94,25 @@ void Commodity::printDetails(string shop) {
 	cout << "Quantities: " << quantity[shop] << endl;
 	cout << endl;
 }
+*/
+/*
+void Commodity::printDetails() {
+	cout << left << setw(column1) << name << setw(column2) << category << setw(column3) << price;
+	map <string, int>::iterator itr;
+	for (itr = quantity.begin(); itr != quantity.end(); itr++) {
+		cout << left << setw(column4) << itr->second;
+	}
+	cout << left << setw(column4) << totalQuantity << endl;
+	cout << endl;
+}
+*/
+void Commodity::printDetails() {
+	cout << left << setw(column1) << name << setw(column2) << category << setw(column3) << price << setw(column4) << totalQuantity << endl;
+}
 
+void Commodity::printDetails(string shop) {
+	cout << left << setw(column1) << name << setw(column2) << category << setw(column3) << price << setw(column4) << quantity[shop] << endl;
+}
 
 
 

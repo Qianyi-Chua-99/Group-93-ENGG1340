@@ -1,1 +1,1 @@
-ParknShop,Wellcome,Guardian,Manning,Giant,Ratu Rajuk,
+Broadway,Fortress,Giant,Guardian,Kim Kee,Manning,ParknShop,Ratu Rajuk,Wellcome,
