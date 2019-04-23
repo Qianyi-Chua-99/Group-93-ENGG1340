@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <ctime>
 #include <iomanip> 
+#include <cmath>
 #include "Shop.h"
 #include "Commodity.h"
 
@@ -475,13 +476,31 @@ void Shop::printAllCommodity(int mode) {
 
 
 void Shop::printSpecificCommodity(string n) {
+	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Quantity" << endl;
 	vector<Commodity>::iterator ptr;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
 		if ((*ptr).getName() == n) {
 			(*ptr).printDetails(shopName);
+			cout << endl;
 			break;
 		}
 	}	
+}
+
+string padding (const string& s, int n, char c) {
+	string temp = s;
+	int len = s.length();
+	if (len < n) {
+		for (int i = 0; i < (n-len); i++)
+			temp += c;
+	}
+	return temp;
+}
+
+double roundToDP (double d, int n) {
+	double tens = pow(10, n);
+	int tmp = (int)(d*tens);
+	return (tmp/tens);
 }
 
 void Shop::readHistory() {
@@ -533,17 +552,36 @@ void Shop::writeHistory() {
    	int month = 1 + ltm->tm_mon;
    	string strMonth = month < 10 ? ("0" + to_string(month)) : to_string(month);
    	string date = to_string(1900 + ltm->tm_year) + '/' + strMonth + '/' + strDay;
-   	string time = to_string(ltm->tm_hour) + ':' + to_string(ltm->tm_min) + ':' + to_string(ltm->tm_sec);
+   	int hour = ltm->tm_hour;
+   	string strHour = hour < 10 ? ("0" + to_string(hour)) : to_string(hour);
+   	int min = ltm->tm_min;
+   	string strMin = min < 10 ? ("0" + to_string(min)) : to_string(min);
+   	int sec = ltm->tm_sec;
+   	string strSec = sec < 10 ? ("0" + to_string(sec)) : to_string(sec);
+   	string time = strHour + ':' + strMin + ':' + strSec;
    	
    	string data;
    	vector<Commodity>::iterator ptr;
    	sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), nameAscending);
    	data += "Recorded at time: " + time + "\n\n";
+   	
+   	data += padding("Commodity", column1, ' ');
+   	data += padding("Category", column2, ' ');
+   	data += padding("Price", column3, ' ');
+   	data += padding("Quantity", column4, ' ');
+   	data += '\n';
+   	
+	stringstream ss;
+   	string price;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
-		data += "Name: " + (*ptr).getName() + '\n';
-		data += "Category: " + (*ptr).getCategory() + '\n';
-		data += "Price: " + to_string((*ptr).getPrice()) + '\n';
-		data += "Quantity: " + to_string((*ptr).getQuantity(shopName)) + "\n\n";
+		ss.str(string());
+		data += padding((*ptr).getName(), column1, ' ');
+	   	data += padding((*ptr).getCategory(), column2, ' ');
+		ss << fixed << setprecision(2) << (*ptr).getPrice();
+		price = ss.str();
+	   	data += padding(price, column3, ' ');
+	   	data += padding(to_string((*ptr).getQuantity(shopName)), column4, ' ');
+	   	data += '\n';
 	}
 	history[date] = data;
 	
@@ -633,22 +671,36 @@ void Shop::writeAllHistory() {
    	int month = 1 + ltm->tm_mon;
    	string strMonth = month < 10 ? ("0" + to_string(month)) : to_string(month);
    	string date = to_string(1900 + ltm->tm_year) + '/' + strMonth + '/' + strDay;
-   	string time = to_string(ltm->tm_hour) + ':' + to_string(ltm->tm_min) + ':' + to_string(ltm->tm_sec);
+   	int hour = ltm->tm_hour;
+   	string strHour = hour < 10 ? ("0" + to_string(hour)) : to_string(hour);
+   	int min = ltm->tm_min;
+   	string strMin = min < 10 ? ("0" + to_string(min)) : to_string(min);
+   	int sec = ltm->tm_sec;
+   	string strSec = sec < 10 ? ("0" + to_string(sec)) : to_string(sec);
+   	string time = strHour + ':' + strMin + ':' + strSec;
    	
    	string data;
    	vector<Commodity>::iterator ptr;
    	sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), nameAscending);
+   	
    	data += "Recorded at time: " + time + "\n\n";
+   	
+   	data += padding("Commodity", column1, ' ');
+   	data += padding("Category", column2, ' ');
+   	data += padding("Price", column3, ' ');
+   	data += padding("Total Quantity", column4, ' ');
+   	data += '\n';
+   	stringstream ss;
+   	string price;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
-		data += "Name: " + (*ptr).getName() + '\n';
-		data += "Category: " + (*ptr).getCategory() + '\n';
-		data += "Price: " + to_string((*ptr).getPrice()) + '\n';
-		data += "Quantity: " + '\n';
-		vector<Shop>::iterator shopptr;
-		for (shopptr = Shop::listOfShop.begin(); shopptr != Shop::listOfShop.end(); shopptr ++) {
-			data += (*shopptr).getShopName() + ": " + to_string((*ptr).getQuantity((*shopptr).getShopName())) + '\n';
-		}
-		data += "Total Quantites: " + to_string((*ptr).getTotalQuantity()) + "\n\n";	
+		ss.str(string());
+		data += padding((*ptr).getName(), column1, ' ');
+	   	data += padding((*ptr).getCategory(), column2, ' ');
+		ss << fixed << setprecision(2) << (*ptr).getPrice();
+		price = ss.str();
+	   	data += padding(price, column3, ' ');
+	   	data += padding(to_string((*ptr).getTotalQuantity()), column4, ' ');
+	   	data += '\n';
 	}
 	
 	Shop::allHistory[date] = data;

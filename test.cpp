@@ -4,6 +4,8 @@
 #include <ctime>
 #include <fstream>
 #include <algorithm>
+#include <iomanip> 
+#include <cmath>
 #include "Shop.h"
 #include "Commodity.h"
 
@@ -24,12 +26,12 @@ int main() {
    	//Shop::listOfShop[0].readHistory();
    	//Shop::listOfShop[0].printHistory();
    	//Shop::listOfShop[0].writeHistory();
-   	Shop::printAllCommodity(1);
+   	//Shop::printAllCommodity(1);
    	//Shop::listOfShop[0].printCommodity(1);
-   	Shop::writeShopData("Shop.txt");
+   	//Shop::writeShopData("Shop.txt");
    	//Shop::deleteAllHistory("2019/4/22");
    	//Shop::printAllHistory();
-   	//Shop::writeAllHistory();   	
+   	Shop::writeAllHistory();   	
    	/*
    	ofstream fout;
 	fout.open("ParknShopHistory.txt");
