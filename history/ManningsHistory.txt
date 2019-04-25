@@ -1,0 +1,20 @@
+2019/04/26;Recorded at time: 02:04:16
+
+Commodity           Category            Price          Quantity  
+100 Plus            Beverage            7.00           20        
+7 Up                Beverage            8.00           32        
+Apple               Fruit               9.00           90        
+Broccoli            Vegetable           7.00           100       
+Chair               Furniture           1000.00        0         
+Chandelier          Furniture           3000.00        0         
+Choco Pie           Candy               6.00           0         
+Coca Cola           Beverage            8.00           20        
+Dell XPS            Electronics         10000.00       55        
+Eggplant            Vegetable           6.00           42        
+Hersheys Choco      Candy               10.00          0         
+Lettuce             Vegetable           7.00           20        
+Macbook Pro         Electronics         12000.00       10        
+Orange              Fruit               9.00           90        
+Pineapple           Fruit               11.00          90        
+Surface             Electronics         34950.00       118       
+;

@@ -180,14 +180,15 @@ void Shop::addCommodity(Commodity& element) {
 	Shop::listOfCommodity.push_back(element);
 }
 
-void Shop::deleteCommodity(string n) {
+bool Shop::deleteCommodity(string n) {
 	vector<Commodity>::iterator ptr;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
 		if((*ptr).getName() == n) {
 			Shop::listOfCommodity.erase(ptr);
-			break;
+			return true;
 		}
-	};
+	}
+	return false;
 }
 
 
@@ -625,11 +626,15 @@ void Shop::writeHistory() {
 	fout.close();
 }
 
-void Shop::deleteHistory(string date) {
+bool Shop::deleteHistory(string date) {
 	map<string, string>::iterator ptr;
 	ptr = history.find(date);
 	if (ptr != history.end()) {
 		history.erase(ptr);
+		return true;
+	}
+	else {
+		return false;
 	}
 }
 

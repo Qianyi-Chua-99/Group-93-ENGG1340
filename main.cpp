@@ -76,35 +76,65 @@ double numberInput (const string& message) {
 
 void Print_History() {
 	string date;
-	int choice;
-	cout << "1. Print commodity history of a specific date " << endl;
-	cout << "2. Print all commodity history" << endl;
-	cout << "3. Return to previous menu" << endl;
-	cout << "Enter your option: ";
-	cin >> choice;
-	cout << endl;
-	switch(choice) 
-	{
-		case 1:
-			cout << "Please enter a date (YYYY/MM/DD): ";
-			cin >> date;
-			cout << endl;
-			Shop::listOfShop[CURRENTSHOP].printHistory(date);
-			break;
-		case 2:
-		 	Shop::listOfShop[CURRENTSHOP].printHistory();
-		 	break;
-		case 3:
-			return;
-		default:
-			cout << "Invalid choice! Please choose again: " << endl;
+	while (true) {
+		int choice;
+		cout << "1. Print commodity history of a specific date " << endl;
+		cout << "2. Print all commodity history" << endl;
+		cout << "3. Delete history on a specific date" << endl;
+		cout << "4. Delete all history" << endl;
+		cout << "5. Return to previous menu" << endl;
+		cout << "Enter your option: ";
+		cin >> choice;
+		cout << endl;
+		switch(choice) 
+		{
+			case 1:
+				cout << "Please enter a date (YYYY/MM/DD): ";
+				cin >> date;
+				cout << endl;
+				Shop::listOfShop[CURRENTSHOP].printHistory(date);
+				break;
+			case 2:
+			 	Shop::listOfShop[CURRENTSHOP].printHistory();
+			 	break;
+			case 3:
+				cout << "Please enter a date (YYYY/MM/DD): ";
+				cin >> date;
+				cout << endl;
+				if (confirmation()) {
+					if(Shop::listOfShop[CURRENTSHOP].deleteHistory(date)) {
+						cout << "Successfully deleted to the record" << endl;
+						cout << endl;
+					}
+					else {
+						cout << "Record not found" << endl;
+						cout << endl;
+					}
+				}
+				else {
+					cout << "Command aborted" << endl;
+					cout << endl;
+				}
+				break;
+			case 4:
+				if (confirmation()) 
+					Shop::listOfShop[CURRENTSHOP].deleteHistory(date);
+				else {
+					cout << "Command aborted" << endl;
+					cout << endl;
+				}
+				break;
+			case 5:
+				return;
+			default:
+				cout << "Invalid choice! Please choose again: " << endl;
+		}
 	}
 			
 }
 
 void EnterShop() {
 	int choice;
-	cout << endl;
 	while (true) {
 		cout << "List of Shops: " << endl;
 		int i;
@@ -129,17 +159,21 @@ void EnterShop() {
 	
 void CreateShop() {
 	cin.ignore();
-	cout << "Please enter shop name: ";
+	cout << "Please enter shop name (0 to return to previous menu): ";
 	string shop_name; 
 	while (true) {
+		cout << endl;
 		getline(cin,shop_name);
 		if (only_spaces(shop_name) || shop_name.length() == 0) {
-			cout << "Invalid shop name! Please re-enter shop name: ";
+			cout << "Invalid shop name! Please re-enter shop name (0 to return to previous menu): ";
 		}
+		else if (shop_name == "0"){
+			return;
+		}		
 		else {
-			cout << "Creating shop: " << shop_name << endl;
 			Shop newShop(shop_name);
-			CreateShop_Options();
+			cout << shop_name << " successfully created." << endl;
+			cout << endl;
 			break;
 		}
 	}
@@ -295,8 +329,10 @@ void Delete_Commodity() {
 		}	
 		cout << endl;
 		if (confirmation()) {
-			Shop::deleteCommodity(commodityName);
-			cout << commodityName << " successfully deleted to the record" << endl;
+			if (Shop::deleteCommodity(commodityName))
+				cout << commodityName << " successfully deleted to the record" << endl;
+			else
+				cout << "Record not found" << endl;
 		}
 		else
 			cout << "Command aborted" << endl;
@@ -305,7 +341,7 @@ void Delete_Commodity() {
 	}
 }
 
-void Sort_Commodity() {
+void Sort_Commodity(int mode = 0) {
 	while (true) {
 		int choice;
 		int order;
@@ -330,22 +366,38 @@ void Sort_Commodity() {
 		}
 		switch (choice) {
 			case 1: {
-				Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::NAME, order);
+				if (mode == 0)
+					Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::NAME, order);
+				else
+					Shop::sortAllCommodity(Shop::NAME, order);
+				cout << endl;
 				return;
 				break;
 			}
 			case 2: {
-				Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::CATEGORY, order);
+				if (mode == 0)
+					Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::CATEGORY, order);
+				else
+					Shop::sortAllCommodity(Shop::CATEGORY, order);
+				cout << endl;
 				return;
 				break;
 			}
 			case 3: {
-				Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::PRICE, order);
+				if (mode == 0)
+					Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::PRICE, order);
+				else
+					Shop::sortAllCommodity(Shop::PRICE, order);
+				cout << endl;
 				return;
 				break;
 			}
 			case 4:{
-				Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::QUANTITY, order);
+				if (mode == 0)
+					Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::QUANTITY, order);
+				else
+					Shop::sortAllCommodity(Shop::QUANTITY, order);
+				cout << endl;
 				return;
 			}
 			case 5:
@@ -356,7 +408,7 @@ void Sort_Commodity() {
 	}
 }
 
-void Filter_Commodity() {
+void Filter_Commodity(int mode = 0) {
 	while (true) {
 		int choice;
 		cout << "Filter by:" << endl;
@@ -372,7 +424,11 @@ void Filter_Commodity() {
 			case 1: {
 				string categoryName = stringInput("Enter the category: ");
 				cout << endl;
-				Shop::listOfShop[CURRENTSHOP].filter(1, categoryName);
+				if (mode == 0)
+					Shop::listOfShop[CURRENTSHOP].filter(1, categoryName);
+				else 
+					Shop::filterAll(1, categoryName);
+				cout << endl;
 				return;
 				break;
 			}
@@ -380,7 +436,11 @@ void Filter_Commodity() {
 				double lb = numberInput("Enter the lower bound: ");
 				double ub = numberInput("Enter the upper bound: ");
 				cout << endl;
-				Shop::listOfShop[CURRENTSHOP].filter(3, lb, ub);
+				if (mode == 0)
+					Shop::listOfShop[CURRENTSHOP].filter(3, lb, ub);
+				else 
+					Shop::filterAll(3, lb, ub);
+				cout << endl;
 				return;
 				break;
 			}
@@ -388,7 +448,11 @@ void Filter_Commodity() {
 				double lb = numberInput("Enter the lower bound: ");
 				double ub = numberInput("Enter the upper bound: ");
 				cout << endl;
-				Shop::listOfShop[CURRENTSHOP].filter(2, lb, ub);
+				if (mode == 0)
+					Shop::listOfShop[CURRENTSHOP].filter(2, lb, ub);
+				else
+					Shop::filterAll(2, lb, ub);
+				cout << endl;
 				return;
 				break;
 			}
@@ -462,31 +526,27 @@ void EnterShop_Options() {
 	}	
 }
 
-void CreateShop_Options() {
-	cout << "1. Add Commodity" << endl;
-	cout << "2. Remove Commodity" << endl;
-	cout << "3. Update Commodity Information" << endl;
-	cout << "4. Exit" << endl;
-	
+void Overall_Options() {
+	cout << "1. Sort" << endl;
+	cout << "2. Filter" << endl;
+	cout << "3. Return to previous menu" << endl;
+	cout << "Enter your option: ";	
 	int choice = 0;
 	cin >> choice;
-	
-	while (true){
-		switch(choice){
-			case 1:
-				//add commodity
-			case 2:
-				//remove commodity
-			case 3:
-				//update commodity
-			case 4:
-				cout << "Bye bye!" << endl;
-				return;
-			default:
-				cout << "Invalid option! Please choose again: " << endl;
-		}
+	cout << endl;
+	if (choice < 1 || choice > 3)
+		return;
+	switch (choice) {
+		case 1:
+			Sort_Commodity(1);
+			break;
+		case 2:
+			Filter_Commodity(1);
+			break;
+		case 3:
+			return;
 	}
-}
+} 
 
 int main() {
 
@@ -502,9 +562,10 @@ int main() {
 
 	while(true) {
 		cout << "Please choose an option: " << endl;
-		cout << "1. Enter a Shop" << "\t\t" << "2. Create a Shop" << '\t'<< "3. Exit" << endl;
+		cout << "1. Enter a Shop" << "\t\t" << "2. Create a Shop" << '\t' << "3. Show Overall Report" << '\t'<< "4. Exit" << endl;
 		int choice;
 		cin >> choice;
+		cout << endl;
 		switch (choice) 
 		{
 		case 1:
@@ -516,6 +577,13 @@ int main() {
 			CreateShop();
 			break;
 		case 3:
+			Overall_Options();
+			break;
+		case 4:
+			Shop::writeAllHistory();
+			Shop::writeData("InformationNew.txt");
+			Shop::writeShopData("ShopNew.txt");
+			cout << "Good Bye :D" << endl;
 			return 0;
 		default:
 			cout << "Invalid option! Please choose again: " << endl;

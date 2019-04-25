@@ -39,7 +39,7 @@ class Shop{
 		static void clearAllHistory();
 		
 		static void addCommodity(Commodity& element);
-		static void deleteCommodity(string n);
+		static bool deleteCommodity(string n);
 		static void printAllCommodity(int mode);
 		static void sortAllCommodity(int mode, int order);
 		static void filterAll(int mode, string category);
@@ -59,7 +59,7 @@ class Shop{
 		void readHistory();
 		void printHistory(string date = "");
 		void writeHistory();
-		void deleteHistory(string date);
+		bool deleteHistory(string date);
 		void clearHistory();
 		
 		void debug();

@@ -10,4 +10,23 @@ Hersheys Choco      Sweet               10.00          5
 Macbook Pro         Electronic          12000.00       90        
 Orange              Fruit               9.00           0         
 Surface             Electronic          3495.00        1         
+;2019/04/26;Recorded at time: 02:04:16
+
+Commodity           Category            Price          Quantity  
+100 Plus            Beverage            7.00           163       
+7 Up                Beverage            8.00           166       
+Apple               Fruit               9.00           105       
+Broccoli            Vegetable           7.00           150       
+Chair               Furniture           1000.00        0         
+Chandelier          Furniture           3000.00        0         
+Choco Pie           Candy               6.00           19        
+Coca Cola           Beverage            8.00           161       
+Dell XPS            Electronics         10000.00       21        
+Eggplant            Vegetable           6.00           188       
+Hersheys Choco      Candy               10.00          5         
+Lettuce             Vegetable           7.00           108       
+Macbook Pro         Electronics         12000.00       90        
+Orange              Fruit               9.00           125       
+Pineapple           Fruit               11.00          152       
+Surface             Electronics         34950.00       0         
 ;
