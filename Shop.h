@@ -39,6 +39,7 @@ class Shop{
 		static void clearAllHistory();
 		
 		static void addCommodity(Commodity& element);
+		static void deleteCommodity(string n);
 		static void printAllCommodity(int mode);
 		static void sortAllCommodity(int mode, int order);
 		static void filterAll(int mode, string category);
@@ -50,7 +51,6 @@ class Shop{
 		void setCommodityPrice(string n, double price);
 		void setCommodityCategory(string n, string category);
 		void printSpecificCommodity(string n);
-		void deleteCommodity(string n);
 		void alertOutOfStock();
 		void filter(int mode, string category);
 		void filter(int mode, double lowerBound, double upperBound);

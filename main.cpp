@@ -22,6 +22,58 @@ bool checkIsNumber (const string& input, double &result) {
     	return true;
 }
 
+bool only_spaces (const string& s) {
+	for (int i = 0; i < s.length(); i++) {
+		if (s[i] != ' ') {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool confirmation() {
+	string tmp;
+	cout << "Are you sure you want to proceed with the operation (y/n)? : ";
+	cin >> tmp;
+	if (tmp == "y")
+		return true;
+	else
+		return false;
+}
+
+string stringInput (const string& message) {
+	string result;
+	while (true) {
+		cout << message;
+		getline(cin, result);
+		if (only_spaces(result)) {
+			cout << "Invalid input! Please provide a valid value." << endl;
+			cout << endl;
+		}
+		else {
+			break;
+		}
+	}
+	return result;
+}
+
+double numberInput (const string& message) {
+	double result;
+	string tmp;
+	while (true) {
+		cout << message;
+		getline(cin, tmp);
+		if (!checkIsNumber(tmp, result)) {
+			cout << "Invalid input! Please provide a valid value." << endl;
+			cout << endl;
+		}
+		else {
+			break;
+		}
+	}
+	return result;
+}
+
 void Print_History() {
 	string date;
 	int choice;
@@ -48,15 +100,6 @@ void Print_History() {
 			cout << "Invalid choice! Please choose again: " << endl;
 	}
 			
-}
-
-bool only_spaces (const string& s) {
-	for (int i = 0; i < s.length(); i++) {
-		if (s[i] != ' ') {
-			return false;
-		}
-	}
-	return true;
 }
 
 void EnterShop() {
@@ -109,10 +152,11 @@ void UpdateCommodity_Options(string commodityName) {
 		cout << "Enter your option: ";
 		
 		cin >> choice;
+		cin.ignore();
 		cout << endl;
 		if (choice < 4) {
 			cout << "Value to be updated: ";
-			cin >> input;
+			getline(cin, input);
 			cout << endl;
 			isNumber = checkIsNumber(input, result);
 		}
@@ -164,8 +208,7 @@ void Update_Commodity() {
 	string choice;
 	while (true) {
 		bool commodityPresent = false;
-		cout << "Input the name of commodity you wish to update (0 to return to previous menu)" << endl;
-		cin >> choice;
+		choice = stringInput("Input the name of commodity you wish to update (0 to return to previous menu)\n");
 		cout << endl;
 		if (choice == "0") {
 			return;
@@ -188,8 +231,7 @@ void Update_Commodity() {
 
 void Show_Commodity() {
 	string commodityName;
-	cout << "Input the commodity name: ";
-	cin >> commodityName;
+	commodityName = stringInput("Input the commodity name: ");
 	cout << endl;
 	for (int i = 0; i < Shop::listOfCommodity.size(); i++) {
 		if (Shop::listOfCommodity[i].getName() == commodityName) {
@@ -198,6 +240,62 @@ void Show_Commodity() {
 		}
 	}
 	cout << "Commodity not found." << endl;
+	cout << endl;
+}
+
+void Add_Commodity() {
+	bool isPresent = false;
+	while (true) {
+		isPresent = false;
+		string commodityName = stringInput("Input the commodity name to be added: ");
+		for (int i = 0; i < Shop::listOfCommodity.size(); i++) {
+			if (Shop::listOfCommodity[i].getName() == commodityName) {
+				cout << "Commodity already present in the record." << endl;
+				isPresent = true;
+				break;
+			}
+		}
+		if (isPresent) continue;
+		string categoryName = stringInput("Input the category of the commodity: ");;
+		double price = numberInput("Input the price of the commodity: ");
+	
+		cout << endl;
+		Commodity newCommodity(commodityName, categoryName, price);
+		Shop::addCommodity(newCommodity);
+		cout << commodityName << " successfully added to the record" << endl;
+		cout << endl;
+		break;
+	}
+}
+
+void Delete_Commodity() {
+	bool isPresent = false;
+	while (true) {
+		isPresent = false;
+		string commodityName = stringInput("Input the commodity name to be removed (0 to return to previous menu): ");
+		if (commodityName == "0")
+			return;
+		for (int i = 0; i < Shop::listOfCommodity.size(); i++) {
+			if (Shop::listOfCommodity[i].getName() == commodityName) {
+				isPresent = true;
+				break;
+			}
+		}
+		if (!isPresent) {
+			cout << "Commodity not found." << endl;
+			cout << endl;
+			return;
+		}	
+		cout << endl;
+		if (confirmation()) {
+			Shop::deleteCommodity(commodityName);
+			cout << commodityName << " successfully deleted to the record" << endl;
+		}
+		else
+			cout << "Command aborted" << endl;
+		cout << endl;
+		break;
+	}
 }
 
 void EnterShop_Options() {
@@ -207,8 +305,8 @@ void EnterShop_Options() {
 		cout << "1. All Commodities in Shop" << endl;
 		cout << "2. Show Commodity History" << endl;
 		cout << "3. Show Commodity Information" << endl;
-		cout << "4. Update Commodity Information" << endl;
-		cout << "5. Add Commodity" << endl;
+		cout << "4. Add Commodity" << endl;
+		cout << "5. Update Commodity Information" << endl;
 		cout << "6. Remove Commodity" << endl;
 		cout << "7. Filter Commodities" << endl;
 		cout << "8. Out-of-Stock Commodites" << endl;
@@ -218,6 +316,7 @@ void EnterShop_Options() {
 	
 		int choice = 0;
 		cin >> choice;
+		cin.ignore();
 		cout << endl;
 	
 		switch (choice) {
@@ -231,19 +330,19 @@ void EnterShop_Options() {
 				Show_Commodity();
 				break;
 			case 4:
-				/*change quantity
-				change price
-				change category */
+				//add commodity
+				Add_Commodity();
+				break;
+			case 5:
 				Update_Commodity();
 				break; 
-			case 5:
-				//add commodity
-				break;
 			case 6:
 				//delete commodity
+				Delete_Commodity();
 				break;
 			case 7:
 				//filter commodity
+				Filter_Commodity();
 				break;
 			case 8:
 				//check out of stock commodities
@@ -317,4 +416,3 @@ int main() {
 		
 	}
 }
-	
