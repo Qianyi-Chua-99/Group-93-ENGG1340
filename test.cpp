@@ -13,9 +13,11 @@ using namespace std;
 
 int main() {
 
-	Shop::readData("Information1.txt");
+	Shop::readData("Information.txt");
 	Shop::readShopData("Shop.txt");
-	
+	cout << Shop::listOfShop[1].getShopName() << endl;
+	Shop::listOfShop[1].sortCommodity(Shop::QUANTITY, Shop::DESCENDING);
+	Shop::sortAllCommodity(Shop::QUANTITY, Shop::DESCENDING);
 	//vector<Shop>::iterator ptr;
 	//for (ptr = Shop::listOfShop.begin(); ptr < Shop::listOfShop.end(); ptr++) {
 	//	cout << (*ptr).getShopName() << endl;
@@ -31,7 +33,7 @@ int main() {
    	//Shop::writeShopData("Shop.txt");
    	//Shop::deleteAllHistory("2019/4/22");
    	//Shop::printAllHistory();
-   	Shop::writeAllHistory();   	
+   	//Shop::writeAllHistory();   	
    	/*
    	ofstream fout;
 	fout.open("ParknShopHistory.txt");

@@ -14,5 +14,3 @@ Chair,Furniture,1000.00,ParknShop,0,Wellcome,0,Guardian,0,Mannings,0,Broadway,12
 Coca Cola,Beverage,8.00,ParknShop,130,Wellcome,161,Guardian,50,Mannings,20,Broadway,0,Fortness,0
 100 Plus,Beverage,7.00,ParknShop,140,Wellcome,163,Guardian,44,Mannings,20,Broadway,10,Fortness,11
 7 Up,Beverage,8.50,ParknShop,140,Wellcome,166,Guardian,50,Mannings,32,Broadway,11,Fortness,15
-
-

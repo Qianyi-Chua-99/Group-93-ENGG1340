@@ -36,10 +36,12 @@ int Commodity::getTotalQuantity() {
 }
 
 int Commodity::getQuantity(string shop) {
-	if (quantity.find(shop) != quantity.end())
+	if (quantity.find(shop) != quantity.end()) {
 		return quantity[shop];
-	else
+	}
+	else {
 		return 0;
+	}
 }
 
 bool Commodity::stockAvailable() {

@@ -22,8 +22,8 @@ int Shop::CATEGORY = 1;
 int Shop::QUANTITY = 2;
 int Shop::PRICE = 3;
 		
-int Shop::ASCENDING = 0;
-int Shop::DESCENDING = 1;
+int Shop::ASCENDING = 1;
+int Shop::DESCENDING = 2;
 
 string Shop::dataDirectory = "data/";
 string Shop::historyDirectory = "history/";
@@ -47,11 +47,24 @@ Shop::Shop(string n) {
 	Shop::listOfShop.push_back(*this);
 }
 
+bool fileExist (const string& fileName) {
+	ifstream fin;
+	fin.open(fileName);
+	if (fin.fail()) {
+		fin.close();
+		return false;
+	}
+	fin.close();
+	return true;
+}
+
 void Shop::readData(string filename) {
 	string CommodityInformation;
 	string commodityName;
 	string category;
 	string tmp;
+	if (!fileExist(Shop::dataDirectory + filename))
+		return;
 	ifstream fin;
 	fin.open(Shop::dataDirectory + filename);
 
@@ -116,8 +129,10 @@ void Shop::writeData(string filename) {
 void Shop::readShopData(string filename) {
 	string ShopInformation;
 	string tmp;
+	if (!fileExist(Shop::dataDirectory + filename))
+		return;
 	ifstream fin;
-	fin.open(dataDirectory + filename);
+	fin.open(Shop::dataDirectory + filename);
 
 	if (fin.fail()) {
 		cout << "Error in file opening!" << endl;
@@ -224,6 +239,7 @@ void Shop::alertOutOfStock () {
 	}
 	else {
 		cout << "List of commodities that are currently out of stock" << endl;
+		cout << endl;
 		cout << message << endl;
 	}
 }
@@ -335,8 +351,9 @@ bool quantityAscending(Commodity& A, Commodity& B) {
 }
 
 bool quantityDescending(Commodity& A, Commodity& B) {
-	return (((A).getTotalQuantity()) > ((B).getTotalQuantity()));
+	return (((A).getQuantity(SHOPNAME)) > ((B).getQuantity(SHOPNAME)));
 }
+
 
 bool quantityAllAscending(Commodity& A, Commodity& B) {
 	return (((A).getTotalQuantity()) < ((B).getTotalQuantity()));
@@ -355,6 +372,7 @@ bool priceDescending(Commodity& A, Commodity& B) {
 }
 
 void Shop::sortCommodity(int mode, int order) {
+	SHOPNAME = shopName;
 	switch (mode) {
 		case 0:
 		{
@@ -506,6 +524,8 @@ double roundToDP (double d, int n) {
 void Shop::readHistory() {
 	string fileName = shopName + "History.txt";
 	ifstream fin;
+	if (!fileExist(Shop::historyDirectory + fileName))
+		return;
 	fin.open(Shop::historyDirectory + fileName);
 
 	if (fin.fail()) {
@@ -619,21 +639,23 @@ void Shop::clearHistory() {
 
 void Shop::readAllHistory() {
 	string fileName = "History.txt";
-	ifstream fin;
-	fin.open(Shop::historyDirectory + fileName);
+	if (fileExist(Shop::historyDirectory + fileName)) {
+		ifstream fin;
+		fin.open(Shop::historyDirectory + fileName);
 
-	if (fin.fail()) {
-		cout << "Error in file opening!" << endl;
-		return;
+		if (fin.fail()) {
+			cout << "Error in file opening!" << endl;
+			return;
+		}
+		string tmp1, tmp2;
+		while (getline(fin, tmp1, ';')) {
+			if (tmp1 == "\n") 
+				break;
+			getline(fin, tmp2, ';');
+			Shop::allHistory[tmp1] = tmp2;
+		}
+		fin.close();
 	}
-	string tmp1, tmp2;
-	while (getline(fin, tmp1, ';')) {
-		if (tmp1 == "\n") 
-			break;
-		getline(fin, tmp2, ';');
-		Shop::allHistory[tmp1] = tmp2;
-	}
-	fin.close();
 	
 	vector<Shop>::iterator shopptr;
 	for (shopptr = Shop::listOfShop.begin(); shopptr != Shop::listOfShop.end(); shopptr ++) {

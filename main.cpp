@@ -105,19 +105,26 @@ void Print_History() {
 void EnterShop() {
 	int choice;
 	cout << endl;
-	cout << "List of Shops: " << endl;
-	for (int i = 0; i < Shop::listOfShop.size(); i++) {
-		cout << i+1 << ". " << Shop::listOfShop[i].getShopName() << endl;
+	while (true) {
+		cout << "List of Shops: " << endl;
+		int i;
+		for (i = 0; i < Shop::listOfShop.size(); i++) {
+			cout << i+1 << ". " << Shop::listOfShop[i].getShopName() << endl;
+		}
+		cout << i+1 << ". Return to previous menu." << endl;
+		cout << "Enter your option: ";
+		cin >> choice;
+		cout << endl;
+		if (choice < Shop::listOfShop.size()+1 && choice > 0) { //valid option, continue on with inventory choices*/
+			CURRENTSHOP = choice-1;
+			EnterShop_Options();
+		} 
+		else if (choice = i+1) {
+			return;
+		}
+		else
+			cout << "Invalid option! Please choose again: " << endl;
 	}
-	cout << "Enter your option: ";
-	cin >> choice;
-	cout << endl;
-	if (choice < Shop::listOfShop.size()+1 && choice > 0) { //valid option, continue on with inventory choices*/
-		CURRENTSHOP = choice-1;
-		EnterShop_Options();
-	}
-	else
-		cout << "Invalid option! Please choose again: " << endl;
 }
 	
 void CreateShop() {
@@ -298,20 +305,116 @@ void Delete_Commodity() {
 	}
 }
 
+void Sort_Commodity() {
+	while (true) {
+		int choice;
+		int order;
+		cout << "Sort by:" << endl;
+		cout << "1. Name" << endl;
+		cout << "2. Category" << endl;
+		cout << "3. Price" << endl;
+		cout << "4. Quantity" << endl;
+		cout << "5. Return to previous menu" << endl;
+		cout << "Enter your option: ";
+		cin >> choice;
+		cout << endl;
+		while (true) {
+			cout << "1. Ascending" << endl;
+			cout << "2. Descending" << endl;
+			cout << "Enter your option: ";
+			cin >> order;
+			cout << endl;
+			if (order == 1 || order == 2)
+				break;
+			cout << "Invalid input." << endl;
+		}
+		switch (choice) {
+			case 1: {
+				Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::NAME, order);
+				return;
+				break;
+			}
+			case 2: {
+				Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::CATEGORY, order);
+				return;
+				break;
+			}
+			case 3: {
+				Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::PRICE, order);
+				return;
+				break;
+			}
+			case 4:{
+				Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::QUANTITY, order);
+				return;
+			}
+			case 5:
+				return;
+			default:
+				continue;
+		}
+	}
+}
+
+void Filter_Commodity() {
+	while (true) {
+		int choice;
+		cout << "Filter by:" << endl;
+		cout << "1. Category" << endl;
+		cout << "2. Price" << endl;
+		cout << "3. Quantity" << endl;
+		cout << "4. Return to previous menu" << endl;
+		cout << "Enter your option: ";
+		cin >> choice;
+		cin.ignore();
+		cout << endl;
+		switch (choice) {
+			case 1: {
+				string categoryName = stringInput("Enter the category: ");
+				cout << endl;
+				Shop::listOfShop[CURRENTSHOP].filter(1, categoryName);
+				return;
+				break;
+			}
+			case 2: {
+				double lb = numberInput("Enter the lower bound: ");
+				double ub = numberInput("Enter the upper bound: ");
+				cout << endl;
+				Shop::listOfShop[CURRENTSHOP].filter(3, lb, ub);
+				return;
+				break;
+			}
+			case 3: {
+				double lb = numberInput("Enter the lower bound: ");
+				double ub = numberInput("Enter the upper bound: ");
+				cout << endl;
+				Shop::listOfShop[CURRENTSHOP].filter(2, lb, ub);
+				return;
+				break;
+			}
+			case 4:
+				return;
+			default:
+				continue;
+		}
+	}
+}
+
 void EnterShop_Options() {
 	while (true) {
 		cout << "Current shop: " << Shop::listOfShop[CURRENTSHOP].getShopName() << endl;
 		cout << endl;
 		cout << "1. All Commodities in Shop" << endl;
-		cout << "2. Show Commodity History" << endl;
+		cout << "2. History" << endl;
 		cout << "3. Show Commodity Information" << endl;
 		cout << "4. Add Commodity" << endl;
 		cout << "5. Update Commodity Information" << endl;
 		cout << "6. Remove Commodity" << endl;
 		cout << "7. Filter Commodities" << endl;
-		cout << "8. Out-of-Stock Commodites" << endl;
-		cout << "9. Return to previous menu" << endl;
-		cout << "10. Exit" << endl;
+		cout << "8. Sort Commodities" << endl;
+		cout << "9. Out-of-Stock Commodites" << endl;
+		cout << "10. Return to previous menu" << endl;
+
 		cout << "Enter your option: ";
 	
 		int choice = 0;
@@ -345,9 +448,13 @@ void EnterShop_Options() {
 				Filter_Commodity();
 				break;
 			case 8:
-				//check out of stock commodities
+				Sort_Commodity();
 				break;	
 			case 9:
+				//check out of stock commodities
+				Shop::listOfShop[CURRENTSHOP].alertOutOfStock();
+				break;
+			case 10:
 				return;
 			default:
 				cout << "Invalid option! Please choose again: " << endl;
@@ -384,7 +491,7 @@ void CreateShop_Options() {
 int main() {
 
 	//initialize everything
-	Shop::readData("Information1.txt");
+	Shop::readData("Information.txt");
 	Shop::readShopData("Shop.txt");
 	Shop::readAllHistory();
 	//Welcome message

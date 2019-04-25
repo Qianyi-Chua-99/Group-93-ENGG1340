@@ -68,6 +68,8 @@ class Shop{
 		string shopName;
 		vector<Commodity*> filterList;
 		map<string, string> history;
+		
 };
+
 
 #endif
