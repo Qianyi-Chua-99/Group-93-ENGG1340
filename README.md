@@ -6,10 +6,44 @@ A commodity inventory system which would help in resolving the above problem wou
 
 # Getting Started
 
-## Prerequisites
+## Installation
 
-The program is a C++ 11 standard program. It must run in an appropriate C++ 11 Standard compiler. This program will run best in Atom in a Ubuntu (Linux) environment as it programmed in Atom in Ubuntu.
+### Prerequisites
 
+The program is a C++ 11 standard program. It must run in an appropriate C++ 11 Standard compiler. This program will run best  in a Ubuntu (Linux) environment as it is programmed in Ubuntu.
+
+### Building the program
+
+OS X & Linux:
+
+```sh
+make main
+```
+
+Windows:
+
+```sh
+make main
+```
+or
+```sh
+mingw32-make main
+```
+Depending on the version of Make installed in your machine
+
+### Running the program
+
+OS X & Linux:
+
+```sh
+./main
+```
+
+Windows:
+
+```sh
+./main.exe
+```
 
 ## Basic Features
 
