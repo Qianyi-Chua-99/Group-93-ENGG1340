@@ -33,6 +33,7 @@ int main() {
 	Shop::readData("Information.txt");
 	Shop::readShopData("Shop.txt");
 	Shop::readAllHistory();
+	cout << endl;
 	cout << "******************************" << endl;
 	cout << " Welcome to Inventory System! " << endl;
 	cout << "******************************" << endl;
@@ -40,7 +41,7 @@ int main() {
 
 	while(true) {
 		cout << "Please choose an option: " << endl;
-		cout << "1. Enter a Shop" << "\t\t" << "2. Create a Shop" << '\t' << "3. Show Overall Report" << '\t'<< "4. Exit" << endl;
+		cout << "1. Enter a Shop" << "\t\t" << "2. Create a Shop" << '\t' << "3. Show Overall Report" << "\t\t"<< "4. Exit" << endl;
 		int choice;
 		cin >> choice;
 		cout << endl;
@@ -385,7 +386,11 @@ void Add_Commodity() {
 	bool isPresent = false;
 	while (true) {
 		isPresent = false;
-		string commodityName = stringInput("Input the commodity name to be added: ");
+		string commodityName = stringInput("Input the commodity name to be added (0 to return to previous menu): ");
+		if (commodityName == "0") {
+			cout << endl;
+			return;
+		}
 		for (int i = 0; i < Shop::listOfCommodity.size(); i++) {
 			if (Shop::listOfCommodity[i].getName() == commodityName) {
 				cout << "Commodity already present in the record." << endl;
