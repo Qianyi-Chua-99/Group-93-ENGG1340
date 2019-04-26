@@ -67,7 +67,9 @@ Shop.txt:
 ```sh
 <Date1>;Recorded at time:<Time1>
 <History Data>
-;
+;<Date2>;Recorded at time:<Time2>
+<History Data>
+;...
 ```
 
 ## Basic Features
