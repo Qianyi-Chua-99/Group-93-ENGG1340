@@ -26,6 +26,9 @@ void Delete_Commodity();
 void Filter_Commodity(int mode = 0);
 void Sort_Commodity(int mode = 0);
 
+/*
+ * main function of the program to control the flow of the program
+ */
 int main() {
 	Shop::readData("Information.txt");
 	Shop::readShopData("Shop.txt");
@@ -63,8 +66,15 @@ int main() {
 		}
 		
 	}
+	return 0;
 }
 
+/*
+ * Check if the string is a number
+ * @param input string input
+ * @param result double variable pass by reference, if the string is a number, the number will be stored in this variable
+ * @return true if the input is only number, false otherwise
+ */
 bool checkIsNumber (const string& input, double &result) {
 	char* end;
     	result = strtod(input.c_str(), &end);
@@ -73,6 +83,11 @@ bool checkIsNumber (const string& input, double &result) {
     	return true;
 }
 
+/*
+ * Check if the string consists of only spaces
+ * @param input string input
+ * @return true if the input has only spaces, false otherwise
+ */
 bool only_spaces (const string& s) {
 	for (int i = 0; i < s.length(); i++) {
 		if (s[i] != ' ') {
@@ -82,6 +97,11 @@ bool only_spaces (const string& s) {
 	return true;
 }
 
+/*
+ * Ask string input from user and validate it
+ * @param message message to be printed out before prompting input
+ * @return input from the user
+ */
 string stringInput (const string& message) {
 	string result;
 	while (true) {
@@ -98,6 +118,11 @@ string stringInput (const string& message) {
 	return result;
 }
 
+/*
+ * Ask number input from user and validate it
+ * @param message message to be printed out before prompting input
+ * @return input from the user
+ */
 double numberInput (const string& message) {
 	double result;
 	string tmp;
@@ -115,6 +140,10 @@ double numberInput (const string& message) {
 	return result;
 }
 
+/*
+ * Prompt a confirmation message ask for user input
+ * @return true if user input y, false if user input n
+ */
 bool confirmation() {
 	string tmp;
 	cout << "Are you sure you want to proceed with the operation (y/n)? : ";
@@ -125,6 +154,9 @@ bool confirmation() {
 		return false;
 }
 
+/*
+ * Print message to ask for user to select a shop from the list
+ */
 void EnterShop() {
 	int choice;
 	while (true) {
@@ -149,6 +181,9 @@ void EnterShop() {
 	}
 }
 
+/*
+ * Function handling UI of shop creation
+ */
 void CreateShop() {
 	cin.ignore();
 	cout << "Please enter shop name (0 to return to previous menu): ";
@@ -171,6 +206,9 @@ void CreateShop() {
 	}
 }
 
+/*
+ * Function handling UI of overall report
+ */
 void Overall_Options() {
 	cout << "1. Sort" << endl;
 	cout << "2. Filter" << endl;
@@ -193,6 +231,9 @@ void Overall_Options() {
 	}
 } 
 
+/*
+ * Function handling UI of operation on shop
+ */
 void EnterShop_Options() {
 	bool first = true;
 	while (true) {
@@ -257,7 +298,10 @@ void EnterShop_Options() {
 		}
 	}	
 }
-	
+
+/*
+ * Function handling UI of history menu
+ */
 void Print_History() {
 	string date;
 	while (true) {
@@ -317,6 +361,9 @@ void Print_History() {
 			
 }
 
+/*
+ * Function handling UI of show commodity
+ */
 void Show_Commodity() {
 	string commodityName;
 	commodityName = stringInput("Input the commodity name: ");
@@ -331,6 +378,9 @@ void Show_Commodity() {
 	cout << endl;
 }
 
+/*
+ * Function handling UI of add commodity
+ */
 void Add_Commodity() {
 	bool isPresent = false;
 	while (true) {
@@ -357,6 +407,9 @@ void Add_Commodity() {
 	}
 }
 
+/*
+ * Function handling UI of update commodity
+ */
 void Update_Commodity() {
 	string choice;
 	while (true) {
@@ -382,6 +435,9 @@ void Update_Commodity() {
 	}
 }
 
+/*
+ * Function handling UI of update commodity option
+ */
 void UpdateCommodity_Options(string commodityName) {
 	int choice;
 	string input;
@@ -460,6 +516,9 @@ void UpdateCommodity_Options(string commodityName) {
 	}
 }
 
+/*
+ * Function handling UI of delete commodity
+ */
 void Delete_Commodity() {
 	bool isPresent = false;
 	while (true) {
@@ -492,6 +551,9 @@ void Delete_Commodity() {
 	}
 }
 
+/*
+ * Function handling UI of filter commodity
+ */
 void Filter_Commodity(int mode) {
 	while (true) {
 		int choice;
@@ -560,6 +622,9 @@ void Filter_Commodity(int mode) {
 	}
 }
 
+/*
+ * Function handling UI of sort commodity
+ */
 void Sort_Commodity(int mode) {
 	while (true) {
 		int choice;

@@ -1,11 +1,11 @@
 Shop.o:Shop.cpp Shop.h
-	g++ -c Shop.cpp
+	g++ -std=c++11 -c Shop.cpp
 	
 Commodity.o:Commodity.cpp Commodity.h
-	g++ -c Commodity.cpp
+	g++ -std=c++11 -c Commodity.cpp
 
 test:test.cpp Commodity.o Shop.o
-	g++ test.cpp Commodity.o Shop.o -o test
+	g++ -std=c++11 test.cpp Commodity.o Shop.o -o test
 
 main:main.cpp Commodity.o Shop.o
-	g++ main.cpp Commodity.o Shop.o -o main
+	g++ -std=c++11 main.cpp Commodity.o Shop.o -o main

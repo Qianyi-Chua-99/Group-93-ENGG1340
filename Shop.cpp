@@ -554,6 +554,11 @@ void Shop::printAllCommodity(int mode) {
 	}
 }
 
+/*
+ * Sort the list of Commodity
+ * @param mode sort by name, category, manufacturer, quantity or price
+ * @param order sort ascedingly or descendingly
+ */
 void Shop::sortAllCommodity(int mode, int order) {
 	switch (mode) {
 		case 0:
@@ -600,6 +605,11 @@ void Shop::sortAllCommodity(int mode, int order) {
 	printAllCommodity(1);
 }
 
+/*
+ * Filter the list of Commodity
+ * @param mode sort by category or manufacturer
+ * @param s category or manufacturer
+ */
 void Shop::filterAll(int mode, string s) {
 	vector<Commodity>::iterator ptr;
 	filterAllList.clear();
@@ -623,6 +633,12 @@ void Shop::filterAll(int mode, string s) {
 	}
 }
 
+/*
+ * Filter the list of Commodity
+ * @param mode sort by price or quantity
+ * @param lowerBound lower boundary for price or quantity
+ * @param upperBound upper boundary for price or quantity
+ */
 void Shop::filterAll(int mode, double lowerBound, double upperBound) {
 	vector<Commodity>::iterator ptr;
 	filterAllList.clear();
@@ -651,6 +667,10 @@ void Shop::filterAll(int mode, double lowerBound, double upperBound) {
 	}
 }
 
+/*
+ * Constructor for Shop
+ * @param n shop name
+ */
 Shop::Shop(string n) {
 	shopName = n;
 	SHOPNAME = n;
@@ -663,10 +683,19 @@ Shop::Shop(string n) {
 	Shop::listOfShop.push_back(*this);
 }
 
+/*
+ * Return Shop name of the shop
+ * @return shop name
+ */
 string Shop::getShopName() {
 	return shopName;
 }
 
+/*
+ * Set the quantity for the Commodity
+ * @param n Commodity name
+ * @param quantity Commodity quantity
+ */
 void Shop::setCommodityQuantity (string n, int quantity) {
 	vector<Commodity>::iterator ptr;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
@@ -677,6 +706,11 @@ void Shop::setCommodityQuantity (string n, int quantity) {
 	}
 }
 
+/*
+ * Set the price for the Commodity
+ * @param n Commodity name
+ * @param price Commodity price
+ */
 void Shop::setCommodityPrice (string n, double price) {
 	vector<Commodity>::iterator ptr;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
@@ -687,6 +721,11 @@ void Shop::setCommodityPrice (string n, double price) {
 	}
 }
 
+/*
+ * Set the category for the Commodity
+ * @param n Commodity name
+ * @param category Commodity category
+ */
 void Shop::setCommodityCategory (string n, string category) {
 	vector<Commodity>::iterator ptr;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
@@ -697,6 +736,11 @@ void Shop::setCommodityCategory (string n, string category) {
 	}
 }
 
+/*
+ * Set the manufacturer for the Commodity
+ * @param n Commodity name
+ * @param category Commodity manufacturer
+ */
 void Shop::setCommodityManufacturer (string n, string manufacturer) {
 	vector<Commodity>::iterator ptr;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
@@ -707,6 +751,9 @@ void Shop::setCommodityManufacturer (string n, string manufacturer) {
 	}
 }
 
+/*
+ * List out the Commodities that are out of stock
+ */
 void Shop::alertOutOfStock () {
 	vector<Commodity>::iterator ptr;
 	string message = "";
@@ -726,6 +773,11 @@ void Shop::alertOutOfStock () {
 	}
 }
 
+/*
+ * Filter the list of Commodity of specific shop
+ * @param mode sort by category or manufacturer
+ * @param s category or manufacturer
+ */
 void Shop::filter(int mode, string s) {
 	vector<Commodity>::iterator ptr;
 	filterList.clear();
@@ -749,6 +801,12 @@ void Shop::filter(int mode, string s) {
 	}
 }
 
+/*
+ * Filter the list of Commodity of specific Shop
+ * @param mode sort by price or quantity
+ * @param lowerBound lower boundary for price or quantity
+ * @param upperBound upper boundary for price or quantity
+ */
 void Shop::filter(int mode, double lowerBound, double upperBound) {
 	vector<Commodity>::iterator ptr;
 	filterList.clear();
@@ -777,6 +835,11 @@ void Shop::filter(int mode, double lowerBound, double upperBound) {
 	}
 }
 
+/*
+ * Sort the list of Commodity of specific Shop
+ * @param mode sort by name, category, manufacturer, quantity or price
+ * @param order sort ascedingly or descendingly
+ */
 void Shop::sortCommodity(int mode, int order) {
 	SHOPNAME = shopName;
 	switch (mode) {
@@ -824,7 +887,10 @@ void Shop::sortCommodity(int mode, int order) {
 	printCommodity(1);
 }
 
-
+/*
+ * Print the list of Commodity of specific Shop
+ * @param mode 0 to print from filter list; 1 to print from normal list
+ */
 void Shop::printCommodity(int mode) {
 	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Quantity" << setw(column5) << "Status" << setw(column6) << "Manufacturer" << endl;
 	switch (mode) {
@@ -847,6 +913,10 @@ void Shop::printCommodity(int mode) {
 	cout << endl;
 }
 
+/*
+ * Print the information of specific Commodity of specific Shop
+ * @param n Commodity name
+ */
 void Shop::printSpecificCommodity(string n) {
 	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Quantity" << setw(column5) << "Status" << setw(column6) << "Manufacturer" << endl;
 	vector<Commodity>::iterator ptr;
@@ -859,6 +929,10 @@ void Shop::printSpecificCommodity(string n) {
 	}	
 }
 
+/*
+ * Read History information of specific shop from a file and
+ * add them to the History list
+ */
 void Shop::readHistory() {
 	string fileName = shopName + "History.txt";
 	ifstream fin;
@@ -880,6 +954,10 @@ void Shop::readHistory() {
 	fin.close();
 }
 
+/*
+ * Print History information of a specific date of specific Shop
+ * @param date date in string
+ */
 void Shop::printHistory(string date) {
 	if (date == "") {
 		map<string, string>::iterator ptr;
@@ -902,6 +980,9 @@ void Shop::printHistory(string date) {
 	} 	
 }
 
+/*
+ * Write History information of specific shop into a file
+ */
 void Shop::writeHistory() {
 	time_t now = time(0);
    	tm *ltm = localtime(&now);
@@ -967,6 +1048,10 @@ void Shop::writeHistory() {
 	fout.close();
 }
 
+/*
+ * Delete History information of a specific date of specific shop
+ * @param date date in string
+ */
 bool Shop::deleteHistory(string date) {
 	map<string, string>::iterator ptr;
 	ptr = history.find(date);
@@ -979,6 +1064,9 @@ bool Shop::deleteHistory(string date) {
 	}
 }
 
+/*
+ * Delete all History information of specific shop
+ */
 void Shop::clearHistory() {
 	history.clear();
 }

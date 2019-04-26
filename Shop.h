@@ -8,6 +8,7 @@
 #include "Commodity.h"
 
 using namespace std;
+
 /*
  * Shop Class
  */
