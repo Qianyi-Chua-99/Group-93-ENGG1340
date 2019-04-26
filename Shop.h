@@ -8,7 +8,9 @@
 #include "Commodity.h"
 
 using namespace std;
-
+/*
+ * Shop Class
+ */
 class Shop{
 	public:
 		static int NAME;

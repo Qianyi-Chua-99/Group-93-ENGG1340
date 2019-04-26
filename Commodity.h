@@ -6,7 +6,9 @@
 #include <map>
 
 using namespace std;
-
+/*
+ * Commodity Class
+ */
 class Commodity{
 	public:
 		Commodity (string n, string c, string m, double p);
