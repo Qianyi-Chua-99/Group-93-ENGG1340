@@ -15,6 +15,7 @@ class Shop{
 		static int CATEGORY;
 		static int QUANTITY;
 		static int PRICE;
+		static int MANUFACTURER;
 		
 		static int ASCENDING;
 		static int DESCENDING;
@@ -50,6 +51,7 @@ class Shop{
 		void setCommodityQuantity(string n, int quantity);
 		void setCommodityPrice(string n, double price);
 		void setCommodityCategory(string n, string category);
+		void setCommodityManufacturer(string n, string manufacturer);
 		void alertOutOfStock();
 		void filter(int mode, string category);
 		void filter(int mode, double lowerBound, double upperBound);

@@ -194,8 +194,15 @@ void Overall_Options() {
 } 
 
 void EnterShop_Options() {
+	bool first = true;
 	while (true) {
 		cout << "Current shop: " << Shop::listOfShop[CURRENTSHOP].getShopName() << endl;
+		cout << endl;
+		if (first) {
+			cout << "!!!ALERT!!!" << endl;
+			Shop::listOfShop[CURRENTSHOP].alertOutOfStock();
+			first = false;
+		}
 		cout << endl;
 		cout << "1. All Commodities in Shop" << endl;
 		cout << "2. History" << endl;
@@ -337,11 +344,12 @@ void Add_Commodity() {
 			}
 		}
 		if (isPresent) continue;
-		string categoryName = stringInput("Input the category of the commodity: ");;
+		string categoryName = stringInput("Input the category of the commodity: ");
+		string manufacturerName = stringInput("Input the manufacturer of the commodity: ");
 		double price = numberInput("Input the price of the commodity: ");
 	
 		cout << endl;
-		Commodity newCommodity(commodityName, categoryName, price);
+		Commodity newCommodity(commodityName, categoryName, manufacturerName, price);
 		Shop::addCommodity(newCommodity);
 		cout << commodityName << " successfully added to the record" << endl;
 		cout << endl;
@@ -383,14 +391,15 @@ void UpdateCommodity_Options(string commodityName) {
 		cout << "Commodity: " << commodityName << endl;
 		cout << "1. Update quantity" << endl;
 		cout << "2. Update category" << endl;
-		cout << "3. Update price" << endl;
-		cout << "4. Done update" << endl;
+		cout << "3. Update manufacturer" << endl;
+		cout << "4. Update price" << endl;
+		cout << "5. Done update" << endl;
 		cout << "Enter your option: ";
 		
 		cin >> choice;
 		cin.ignore();
 		cout << endl;
-		if (choice < 4) {
+		if (choice < 5) {
 			cout << "Value to be updated: ";
 			getline(cin, input);
 			cout << endl;
@@ -421,6 +430,17 @@ void UpdateCommodity_Options(string commodityName) {
 				}
 				break;
 			case 3:
+				if (!isNumber) {
+					Shop::listOfShop[CURRENTSHOP].setCommodityManufacturer(commodityName, input);
+					cout << "Manufacturer updated!" << endl;
+					cout << endl;
+				}
+				else {
+					cout << "Invalid value given." << endl;
+					cout << endl;
+				}
+				break;
+			case 4:
 				if (isNumber) {
 					Shop::listOfShop[CURRENTSHOP].setCommodityPrice(commodityName, result);
 					cout << "Price updated!" << endl;
@@ -431,7 +451,7 @@ void UpdateCommodity_Options(string commodityName) {
 					cout << endl;
 				}
 				break;
-			case 4:
+			case 5:
 				return;
 			default:
 				cout << "Invalid option." << endl;
@@ -479,7 +499,8 @@ void Filter_Commodity(int mode) {
 		cout << "1. Category" << endl;
 		cout << "2. Price" << endl;
 		cout << "3. Quantity" << endl;
-		cout << "4. Return to previous menu" << endl;
+		cout << "4. Manufacturer" << endl;
+		cout << "5. Return to previous menu" << endl;
 		cout << "Enter your option: ";
 		cin >> choice;
 		cin.ignore();
@@ -489,9 +510,9 @@ void Filter_Commodity(int mode) {
 				string categoryName = stringInput("Enter the category: ");
 				cout << endl;
 				if (mode == 0)
-					Shop::listOfShop[CURRENTSHOP].filter(1, categoryName);
+					Shop::listOfShop[CURRENTSHOP].filter(Shop::CATEGORY, categoryName);
 				else 
-					Shop::filterAll(1, categoryName);
+					Shop::filterAll(Shop::CATEGORY, categoryName);
 				cout << endl;
 				return;
 				break;
@@ -501,9 +522,9 @@ void Filter_Commodity(int mode) {
 				double ub = numberInput("Enter the upper bound: ");
 				cout << endl;
 				if (mode == 0)
-					Shop::listOfShop[CURRENTSHOP].filter(3, lb, ub);
+					Shop::listOfShop[CURRENTSHOP].filter(Shop::PRICE, lb, ub);
 				else 
-					Shop::filterAll(3, lb, ub);
+					Shop::filterAll(Shop::PRICE, lb, ub);
 				cout << endl;
 				return;
 				break;
@@ -513,14 +534,25 @@ void Filter_Commodity(int mode) {
 				double ub = numberInput("Enter the upper bound: ");
 				cout << endl;
 				if (mode == 0)
-					Shop::listOfShop[CURRENTSHOP].filter(2, lb, ub);
+					Shop::listOfShop[CURRENTSHOP].filter(Shop::QUANTITY, lb, ub);
 				else
-					Shop::filterAll(2, lb, ub);
+					Shop::filterAll(Shop::QUANTITY, lb, ub);
 				cout << endl;
 				return;
 				break;
 			}
-			case 4:
+			case 4: {
+				string manufacturerName = stringInput("Enter the manufacturer: ");
+				cout << endl;
+				if (mode == 0)
+					Shop::listOfShop[CURRENTSHOP].filter(Shop::MANUFACTURER, manufacturerName);
+				else 
+					Shop::filterAll(Shop::MANUFACTURER, manufacturerName);
+				cout << endl;
+				return;
+				break;
+			}
+			case 5:
 				return;
 			default:
 				continue;
@@ -537,7 +569,8 @@ void Sort_Commodity(int mode) {
 		cout << "2. Category" << endl;
 		cout << "3. Price" << endl;
 		cout << "4. Quantity" << endl;
-		cout << "5. Return to previous menu" << endl;
+		cout << "5. Manufacturer" << endl;
+		cout << "6. Return to previous menu" << endl;
 		cout << "Enter your option: ";
 		cin >> choice;
 		cout << endl;
@@ -587,7 +620,16 @@ void Sort_Commodity(int mode) {
 				cout << endl;
 				return;
 			}
-			case 5:
+			case 5: {
+				if (mode == 0)
+					Shop::listOfShop[CURRENTSHOP].sortCommodity(Shop::MANUFACTURER, order);
+				else
+					Shop::sortAllCommodity(Shop::MANUFACTURER, order);
+				cout << endl;
+				return;
+				break;
+			}
+			case 6:
 				return;
 			default:
 				continue;

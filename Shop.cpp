@@ -59,6 +59,14 @@ bool priceDescending(Commodity& A, Commodity& B) {
 	return (((A).getPrice()) > ((B).getPrice()));
 }
 
+bool manufacturerAscending(Commodity& A, Commodity& B) {
+	return (((A).getManufacturer()) < ((B).getManufacturer()));
+}
+
+bool manufacturerDescending(Commodity& A, Commodity& B) {
+	return (((A).getManufacturer()) > ((B).getManufacturer()));
+}
+
 bool fileExist (const string& fileName) {
 	ifstream fin;
 	fin.open(fileName);
@@ -90,11 +98,14 @@ extern int column1;
 extern int column2;
 extern int column3;
 extern int column4;
+extern int column5;
+extern int column6;
 
 int Shop::NAME = 0;
 int Shop::CATEGORY = 1;
 int Shop::QUANTITY = 2;
 int Shop::PRICE = 3;
+int Shop::MANUFACTURER = 4;
 		
 int Shop::ASCENDING = 1;
 int Shop::DESCENDING = 2;
@@ -111,6 +122,7 @@ void Shop::readData(string filename) {
 	string CommodityInformation;
 	string commodityName;
 	string category;
+	string manufacturer;
 	string tmp;
 	if (!fileExist(Shop::dataDirectory + filename))
 		return;
@@ -125,9 +137,10 @@ void Shop::readData(string filename) {
 		istringstream iss(CommodityInformation);
 		getline(iss, commodityName, ',');
 		getline(iss, category, ',');
+		getline(iss, manufacturer, ',');
 		getline(iss, tmp, ',');
 		double price = stoi(tmp);
-		Commodity newCommodity (commodityName, category, price);
+		Commodity newCommodity (commodityName, category, manufacturer, price);
 		string shopName;
 		int quantity;
 		bool paired = false;
@@ -183,6 +196,7 @@ void Shop::writeData(string filename) {
 		tmp = "";
 		tmp += (*ptr).getName() + ',';
 		tmp += (*ptr).getCategory() + ',';
+		tmp += (*ptr).getManufacturer() + ',';
 		tmp += to_string((*ptr).getPrice()) + ',';
 		vector<Shop>::iterator ptr1;
 		for (ptr1 = Shop::listOfShop.begin(); ptr1 < Shop::listOfShop.end(); ptr1++) {
@@ -289,6 +303,8 @@ void Shop::writeAllHistory() {
    	data += padding("Category", column2, ' ');
    	data += padding("Price", column3, ' ');
    	data += padding("Total Quantity", column4, ' ');
+   	data += padding("Status", column5, ' ');
+   	data += padding("Manufacturer", column6, ' ');
    	data += '\n';
    	stringstream ss;
    	string price;
@@ -300,6 +316,8 @@ void Shop::writeAllHistory() {
 		price = ss.str();
 	   	data += padding(price, column3, ' ');
 	   	data += padding(to_string((*ptr).getTotalQuantity()), column4, ' ');
+	   	data += padding(((*ptr).getTotalQuantity() == 0)?"Out of stock" : "Available" , column5, ' ');
+	   	data += padding((*ptr).getManufacturer(), column6, ' ');
 	   	data += '\n';
 	}
 	
@@ -372,7 +390,7 @@ bool Shop::deleteCommodity(string n) {
 }
 
 void Shop::printAllCommodity(int mode) {
-	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Total Quantity" << endl;
+	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Total Quantity" << setw(column5) << "Status" << setw(column6) << "Manufacturer" << endl;
 	
 	switch (mode) {
 		case 0:
@@ -427,17 +445,33 @@ void Shop::sortAllCommodity(int mode, int order) {
 				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), priceDescending);
 			break;
 		}
+		case 4:
+		{
+			if (order == Shop::ASCENDING)
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), manufacturerAscending);
+			else
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), manufacturerDescending);
+			break;
+		}
 	}
 	printAllCommodity(1);
 }
 
-void Shop::filterAll(int mode, string category) {
+void Shop::filterAll(int mode, string s) {
 	vector<Commodity>::iterator ptr;
 	filterAllList.clear();
 	switch (mode) {
 		case 1:
 			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
-				if ((*ptr).getCategory() == category){
+				if ((*ptr).getCategory() == s){
+					filterAllList.push_back(&(*ptr));
+				}
+			}
+			printAllCommodity(0);
+			break;
+		case 4:
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				if ((*ptr).getManufacturer() == s){
 					filterAllList.push_back(&(*ptr));
 				}
 			}
@@ -520,6 +554,16 @@ void Shop::setCommodityCategory (string n, string category) {
 	}
 }
 
+void Shop::setCommodityManufacturer (string n, string manufacturer) {
+	vector<Commodity>::iterator ptr;
+	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+		if(((*ptr).getName()) == n) {
+			(*ptr).setManufacturer(manufacturer);
+			break;
+		}
+	}
+}
+
 void Shop::alertOutOfStock () {
 	vector<Commodity>::iterator ptr;
 	string message = "";
@@ -539,13 +583,21 @@ void Shop::alertOutOfStock () {
 	}
 }
 
-void Shop::filter(int mode, string category) {
+void Shop::filter(int mode, string s) {
 	vector<Commodity>::iterator ptr;
 	filterList.clear();
 	switch (mode) {
 		case 1:
 			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
-				if ((*ptr).getCategory() == category){
+				if ((*ptr).getCategory() == s){
+					filterList.push_back(&(*ptr));
+				}
+			}
+			printCommodity(0);
+			break;
+		case 4:
+			for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
+				if ((*ptr).getManufacturer() == s){
 					filterList.push_back(&(*ptr));
 				}
 			}
@@ -617,13 +669,21 @@ void Shop::sortCommodity(int mode, int order) {
 				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), priceDescending);
 			break;
 		}
+		case 4:
+		{
+			if (order == Shop::ASCENDING)
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), manufacturerAscending);
+			else
+				sort(Shop::listOfCommodity.begin(), Shop::listOfCommodity.end(), manufacturerDescending);
+			break;
+		}
 	}
 	printCommodity(1);
 }
 
 
 void Shop::printCommodity(int mode) {
-	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Quantity" << endl;
+	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Quantity" << setw(column5) << "Status" << setw(column6) << "Manufacturer" << endl;
 	switch (mode) {
 		case 0:
 		{
@@ -645,7 +705,7 @@ void Shop::printCommodity(int mode) {
 }
 
 void Shop::printSpecificCommodity(string n) {
-	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Quantity" << endl;
+	cout << left << setw(column1) << "Commodity" << setw(column2) << "Category" << setw(column3) << "Price" << setw(column4) << "Quantity" << setw(column5) << "Status" << setw(column6) << "Manufacturer" << endl;
 	vector<Commodity>::iterator ptr;
 	for (ptr = Shop::listOfCommodity.begin(); ptr < Shop::listOfCommodity.end(); ptr ++) {
 		if ((*ptr).getName() == n) {
@@ -724,6 +784,8 @@ void Shop::writeHistory() {
    	data += padding("Category", column2, ' ');
    	data += padding("Price", column3, ' ');
    	data += padding("Quantity", column4, ' ');
+   	data += padding("Status", column5, ' ');
+   	data += padding("Manufacturer", column6, ' ');
    	data += '\n';
    	
 	stringstream ss;
@@ -736,6 +798,8 @@ void Shop::writeHistory() {
 		price = ss.str();
 	   	data += padding(price, column3, ' ');
 	   	data += padding(to_string((*ptr).getQuantity(shopName)), column4, ' ');
+	   	data += padding(((*ptr).getQuantity(shopName) == 0)?"Out of stock" : "Available" , column5, ' ');
+	   	data += padding((*ptr).getManufacturer(), column6, ' ');
 	   	data += '\n';
 	}
 	history[date] = data;

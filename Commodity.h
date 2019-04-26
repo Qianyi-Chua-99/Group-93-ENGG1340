@@ -9,15 +9,16 @@ using namespace std;
 
 class Commodity{
 	public:
-		Commodity (string n, string c, double p);
+		Commodity (string n, string c, string m, double p);
 		string getName();
 		string getCategory();
+		string getManufacturer();
 		double getPrice();
 		int getTotalQuantity();
 		int getQuantity(string shop);
-		bool stockAvailable();
 		void setName(string n);
 		void setCategory(string c);
+		void setManufacturer(string m);
 		void setPrice(double p);
 		void setShopQuantity(string shop, int quantity);
 		bool isShopPresent(string shop);
@@ -28,9 +29,9 @@ class Commodity{
 		map<string, int> quantity;
 		string name;
 		string category;
+		string manufacturer;
 		double price;
 		int totalQuantity;
-		bool outOfStock;
 		
 };
 

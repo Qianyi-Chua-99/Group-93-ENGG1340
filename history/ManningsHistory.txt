@@ -1,20 +1,21 @@
-2019/04/26;Recorded at time: 10:37:28
+2019/04/26;Recorded at time: 14:14:35
 
-Commodity           Category            Price          Quantity  
-100 Plus            Beverage            7.00           20        
-7 Up                Beverage            8.00           32        
-Apple               Fruit               9.00           90        
-Broccoli            Vegetable           7.00           100       
-Chair               Furniture           1000.00        0         
-Chandelier          Furniture           3000.00        0         
-Choco Pie           Candy               6.00           0         
-Coca Cola           Beverage            8.00           20        
-Dell XPS            Electronics         10000.00       55        
-Eggplant            Vegetable           6.00           42        
-Hersheys Choco      Candy               10.00          0         
-Lettuce             Vegetable           7.00           20        
-Macbook Pro         Electronics         12000.00       10        
-Orange              Fruit               9.00           90        
-Pineapple           Fruit               11.00          90        
-Surface             Electronics         34950.00       118       
+Commodity           Category            Price          Quantity       Status         Manufacturer        
+100 Plus            Beverage            7.00           20             Available      ManufacturerC       
+7 Up                Beverage            8.00           32             Available      ManufacturerB       
+Apple               Fruit               9.00           90             Available      ManufacturerA       
+Broccoli            Vegetable           7.00           100            Available      ManufacturerA       
+Chair               Furniture           1000.00        0              Out of stock   ManufacturerC       
+Chandelier          Furniture           3000.00        0              Out of stock   ManufacturerA       
+Choco Pie           Candy               6.00           0              Out of stock   ManufacturerC       
+Coca Cola           Beverage            8.00           20             Available      ManufacturerA       
+Dell XPS            Electronics         10000.00       55             Available      ManufacturerA       
+Eggplant            Vegetable           6.00           42             Available      ManufacturerB       
+Hersheys Choco      Candy               10.00          0              Out of stock   ManufacturerA       
+Lettuce             Vegetable           7.00           20             Available      ManufacturerB       
+Macbook Pro         Electronics         12000.00       10             Available      ManufacturerB       
+Mentos              Candy               12.00          0              Out of stock   ManufacturerC       
+Orange              Fruit               9.00           90             Available      ManufacturerC       
+Pineapple           Fruit               11.00          90             Available      ManufacturerA       
+Surface             Electronics         34950.00       118            Available      ManufacturerC       
 ;

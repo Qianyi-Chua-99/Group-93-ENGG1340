@@ -1,16 +1,17 @@
-Broccoli,Vegetable,7.00,ParknShop,100,Wellcome,150,Guardian,0,Mannings,100,Broadway,0,Fortress,0
-Lettuce,Vegetable,7.50,ParknShop,200,Wellcome,108,Guardian,10,Mannings,20,Broadway,0,Fortress,0
-Eggplant,Vegetable,6.50,ParknShop,220,Wellcome,188,Guardian,101,Mannings,42,Broadway,0,Fortress,0
-Apple,Fruit,9.00,ParknShop,104,Wellcome,105,Guardian,0,Mannings,90,Broadway,5,Fortress,10
-Orange,Fruit,9.50,ParknShop,144,Wellcome,125,Guardian,70,Mannings,90,Broadway,10,Fortress,20
-Pineapple,Fruit,11.50,ParknShop,132,Wellcome,152,Guardian,170,Mannings,90,Broadway,10,Fortress,20
-Choco Pie,Candy,6.00,ParknShop,150,Wellcome,19,Guardian,100,Mannings,0,Broadway,0,Fortress,0
-Hersheys Choco,Candy,10.00,ParknShop,190,Wellcome,5,Guardian,100,Mannings,0,Broadway,0,Fortress,0
-Surface,Electronics,34950.00,ParknShop,0,Wellcome,0,Guardian,112,Mannings,118,Broadway,100,Fortress,150
-Dell XPS,Electronics,10000.00,ParknShop,131,Wellcome,21,Guardian,100,Mannings,55,Broadway,24,Fortress,102
-Macbook Pro,Electronics,12000.00,ParknShop,12,Wellcome,90,Guardian,100,Mannings,10,Broadway,141,Fortress,180
-Chandelier,Furniture,3000.00,ParknShop,0,Wellcome,0,Guardian,0,Mannings,0,Broadway,110,Fortress,100
-Chair,Furniture,1000.00,ParknShop,0,Wellcome,0,Guardian,0,Mannings,0,Broadway,121,Fortress,200
-Coca Cola,Beverage,8.00,ParknShop,130,Wellcome,161,Guardian,50,Mannings,20,Broadway,0,Fortness,0
-100 Plus,Beverage,7.00,ParknShop,140,Wellcome,163,Guardian,44,Mannings,20,Broadway,10,Fortness,11
-7 Up,Beverage,8.50,ParknShop,140,Wellcome,166,Guardian,50,Mannings,32,Broadway,11,Fortness,15
+100 Plus,Beverage,ManufacturerC,7.000000,Broadway,10,Fortress,0,Guardian,44,Mannings,20,ParknShop,140,Wellcome,163,Tesco,0,
+7 Up,Beverage,ManufacturerB,8.000000,Broadway,11,Fortress,0,Guardian,50,Mannings,32,ParknShop,140,Wellcome,166,Tesco,0,
+Apple,Fruit,ManufacturerA,9.000000,Broadway,5,Fortress,10,Guardian,0,Mannings,90,ParknShop,104,Wellcome,105,Tesco,0,
+Broccoli,Vegetable,ManufacturerA,7.000000,Broadway,0,Fortress,0,Guardian,0,Mannings,100,ParknShop,100,Wellcome,150,Tesco,0,
+Chair,Furniture,ManufacturerC,1000.000000,Broadway,121,Fortress,200,Guardian,0,Mannings,0,ParknShop,0,Wellcome,0,Tesco,0,
+Chandelier,Furniture,ManufacturerA,3000.000000,Broadway,110,Fortress,100,Guardian,0,Mannings,0,ParknShop,0,Wellcome,0,Tesco,0,
+Choco Pie,Candy,ManufacturerC,6.000000,Broadway,0,Fortress,0,Guardian,100,Mannings,0,ParknShop,150,Wellcome,19,Tesco,0,
+Coca Cola,Beverage,ManufacturerA,8.000000,Broadway,0,Fortress,0,Guardian,50,Mannings,20,ParknShop,130,Wellcome,161,Tesco,0,
+Dell XPS,Electronics,ManufacturerA,10000.000000,Broadway,24,Fortress,102,Guardian,100,Mannings,55,ParknShop,131,Wellcome,21,Tesco,0,
+Eggplant,Vegetable,ManufacturerB,6.000000,Broadway,0,Fortress,0,Guardian,101,Mannings,42,ParknShop,220,Wellcome,188,Tesco,0,
+Hersheys Choco,Candy,ManufacturerA,10.000000,Broadway,0,Fortress,0,Guardian,100,Mannings,0,ParknShop,190,Wellcome,5,Tesco,0,
+Lettuce,Vegetable,ManufacturerB,7.000000,Broadway,0,Fortress,0,Guardian,10,Mannings,20,ParknShop,200,Wellcome,108,Tesco,0,
+Macbook Pro,Electronics,ManufacturerB,12000.000000,Broadway,141,Fortress,180,Guardian,100,Mannings,10,ParknShop,12,Wellcome,90,Tesco,0,
+Mentos,Candy,ManufacturerC,12.000000,Broadway,0,Fortress,0,Guardian,0,Mannings,0,ParknShop,0,Wellcome,0,Tesco,0,
+Orange,Fruit,ManufacturerC,9.000000,Broadway,10,Fortress,20,Guardian,70,Mannings,90,ParknShop,144,Wellcome,125,Tesco,0,
+Pineapple,Fruit,ManufacturerA,11.000000,Broadway,10,Fortress,20,Guardian,170,Mannings,90,ParknShop,132,Wellcome,152,Tesco,0,
+Surface,Electronics,ManufacturerC,34950.000000,Broadway,100,Fortress,150,Guardian,112,Mannings,118,ParknShop,0,Wellcome,0,Tesco,0,
