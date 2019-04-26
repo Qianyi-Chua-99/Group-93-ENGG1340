@@ -44,6 +44,31 @@ Windows:
 ```sh
 ./main.exe
 ```
+## Data Input and Output Format
+
+Information.txt - the information of each Commodity
+
+Information.txt:
+```sh
+<Commodity1 Name>,<Commodity1 Category>,<Commodity1 Manufacturer>,<Commodity1 Price>,<Shop1 Name>,<Shop1 Quantity>,<Shop2 Name>,<Shop2 Quantity>,...
+<Commodity2 Name>,<Commodity2 Category>,<Commodity2 Manufacturer>,<Commodity2 Price>,<Shop1 Name>,<Shop1 Quantity>,<Shop2 Name>,<Shop2 Quantity>,...
+```
+
+Shop.txt - the name of each Shop
+
+Shop.txt:
+```sh
+<Shop1 Name>,<Shop2 Name>,<Shop3 Name>,<Shop4 Name>,...
+```
+
+<Shop Name>_History.txt - the history information of each Shop
+
+<Shop Name>_History.txt:
+```sh
+<Date1>;Recorded at time:<Time1>
+<History Data>
+;
+```
 
 ## Basic Features
 
