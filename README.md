@@ -61,13 +61,15 @@ Shop.txt:
 <Shop1 Name>,<Shop2 Name>,<Shop3 Name>,<Shop4 Name>,...
 ```
 
-<Shop Name>_History.txt - the history information of each Shop
+\<Shop Name\>_History.txt - the history information of each Shop
 
-<Shop Name>_History.txt:
+\<Shop Name\>_History.txt:
 ```sh
 <Date1>;Recorded at time:<Time1>
 <History Data>
-;
+;<Date2>;Recorded at time:<Time2>
+<History Data>
+;...
 ```
 
 ## Basic Features
