@@ -74,19 +74,22 @@ Shop.txt:
 
 ## Basic Features
 
-* Search commodity according to different filters (e.g. in-stock/out-of-stock)
-* Insert new commodity with basic information (name, manufacturer, amount, price, availability of shop(s)) after each procurement 
-* Delete obsolete commodity 
-* Update commodity information 
-* Automatic change of inventory status according to the amount of commodity that is currently available (e.g. when the amount reaches     zero, the inventory status would become “out-of-stock”); 
-* Deliver alerts when the commodity is “out-of-stock”
+* Insert new commodities with basic information (e.g. name, manufacturer, price) after each procurement
+* Update commodity information (e.g. price, quantity, category, manufacturer)
+* Delete obsolete commodities
+* Sort commodities according to different fields (e.g. category, price, quantity, manufacturer, time)
+* Filter commodities according to different fields (e.g. category, price, quantity, manufacturer)
+* Automatic change of inventory status according to the amount of commodity that is currently available (e.g. when the amount reaches     zero, the inventory status would become “out-of-stock”)
+* Deliver alerts of the “out-of-stock” commodities when entering a shop
+* Add new shops to record 
 
 
 ## Additional Features 
 
-* Removal of duplicate commodities (Barcode ID can be implemented)
-* Import/export full inventory list to local file (.txt)
-* Sales/purchases history (Sorted by timestamps) 
+* Import/export full commodity list to local file (.txt)
+* Access history records of commodities in each shop 
+* Delete history records
+* Import/export history record to local file (.txt)
 
 ## Contributors
 
