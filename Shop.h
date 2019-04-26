@@ -50,20 +50,18 @@ class Shop{
 		void setCommodityQuantity(string n, int quantity);
 		void setCommodityPrice(string n, double price);
 		void setCommodityCategory(string n, string category);
-		void printSpecificCommodity(string n);
 		void alertOutOfStock();
 		void filter(int mode, string category);
 		void filter(int mode, double lowerBound, double upperBound);
 		void sortCommodity(int mode, int order);
 		void printCommodity(int mode);
+		void printSpecificCommodity(string n);
 		void readHistory();
 		void printHistory(string date = "");
 		void writeHistory();
 		bool deleteHistory(string date);
 		void clearHistory();
-		
-		void debug();
-		
+
 	private:
 		string shopName;
 		vector<Commodity*> filterList;

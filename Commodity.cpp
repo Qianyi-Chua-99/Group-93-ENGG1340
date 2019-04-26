@@ -75,39 +75,7 @@ bool Commodity::isShopPresent(string shop) {
 		return true;
 	return false;
 }
-/*
-void Commodity::printDetails() {
-	cout << "Name: " << name << endl;
-	cout << "Category: " << category << endl;
-	cout << "Price: " << price << endl;
-	cout << "Quantities: " << endl;
-	map <string, int>::iterator itr;
-	for (itr = quantity.begin(); itr != quantity.end(); itr++) {
-		cout << itr->first << ' ' << itr->second << endl;
-	}
-	cout << "Total quantities: " << totalQuantity << endl;
-	cout << endl;
-}
 
-void Commodity::printDetails(string shop) {
-	cout << "Name: " << name << endl;
-	cout << "Category: " << category << endl;
-	cout << "Price: " << price << endl;
-	cout << "Quantities: " << quantity[shop] << endl;
-	cout << endl;
-}
-*/
-/*
-void Commodity::printDetails() {
-	cout << left << setw(column1) << name << setw(column2) << category << setw(column3) << price;
-	map <string, int>::iterator itr;
-	for (itr = quantity.begin(); itr != quantity.end(); itr++) {
-		cout << left << setw(column4) << itr->second;
-	}
-	cout << left << setw(column4) << totalQuantity << endl;
-	cout << endl;
-}
-*/
 void Commodity::printDetails() {
 	cout << left << setw(column1) << name << setw(column2) << category << setw(column3) << price << setw(column4) << totalQuantity << endl;
 }
